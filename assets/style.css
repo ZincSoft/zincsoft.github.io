@@ -27,7 +27,12 @@ body {
   font-size: 16px;
   line-height: 1.5;
   color: #082032;
-  background-color: #fff; }
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 50px;
+  height: 100vh;
+  margin: 0; }
 
 p {
   margin-top: 0;
@@ -209,10 +214,7 @@ code {
 
 .header-title {
   color: #FFF;
-  transition: color 2s ease-out 100ms; }
-
-.header-title:hover {
-  color: #FF1493; }
+  white-space: nowrap; }
 
 .header-text {
   color: #082032; }
@@ -228,6 +230,14 @@ code {
 
 .text-accent {
   color: #FF4C29; }
+
+/* Certain text */
+.noscript-compat {
+  transition: all .2s ease-in-out; }
+
+.noscript-compat:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(16px 16px 20px black); }
 
 /* Layout utilities */
 .container {

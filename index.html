@@ -13,6 +13,59 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 		<script async defer src="https://buttons.github.io/buttons.js"></script>
+        <script>
+            // Function to sleep a certain number of milliseconds.
+            function sleep(ms) {
+                // Return a promise with a timeout.
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            // When the website state changes, and we are ready, run the code below.
+            document.onreadystatechange = async function () {
+                document.getElementById('dynamic-title').style.removeProperty('display');
+
+                // When the website is complete and ready!
+                 if (document.readyState == "complete") {
+                    var prev = "";
+                    while (true) {
+                        // Get a list of possible completions.
+                        var x = ['Project', 'Foundation', 'Website', 'Organisation', 'Movement'];
+
+                        // Get a randon completion.
+                        var e = x[Math.floor(Math.random() * x.length)];
+
+                        if (prev == e) { continue; }
+
+                        // Set the title.
+                        document.getElementById('dynamic-title').innerHTML = 'The<br/><i>ZincSoft</i><br/>';
+                    
+                        for (var i = 0; i < e.length; i++) {
+                            if (i != 0) {
+                                document.getElementById('dynamic-title').innerHTML = document.getElementById('dynamic-title').innerHTML.slice(0, -1);
+                            }
+
+                            document.getElementById('dynamic-title').innerHTML += e.charAt(i) + "|";
+                            await sleep(100);
+                        }
+
+                        await sleep(4000);
+
+                        for (var i = 0; i < e.length+1; i++) {
+                            document.getElementById('dynamic-title').innerHTML = document.getElementById('dynamic-title').innerHTML.slice(0, -1);
+
+                            if (i == e.length) {
+                                document.getElementById('dynamic-title').innerHTML += '|';
+                            }
+
+                            await sleep(50);
+                        }
+
+                        await sleep(50);
+                    }
+                 }
+             }
+        </script>
+        <noscript><style> .jsonly { display: none } </style></noscript>
 	</head>
 	<body>
 		<div>
@@ -34,8 +87,12 @@
 					</ul>
 				</div>
 				<div class="container mx-auto px-2 mb-2 clearfix header-text">
-					<h1 class="h0 inline-block col-9 sm-width-full py-4 mt-3 header-title">The <i>ZincSoft</i> Project</h1>
-					<div class="clearfix mb-4 py-1">
+                    <h1 class="h0 inline-block col-9 sm-width-full py-4 mt-3 header-title" id="dynamic-title" style="display: none !important;">The<br><i>ZincSoft</i><br/><u>Website|</u></h1>
+                    <noscript>
+                        <h1 class="h0 inline-block col-9 sm-width-full py-4 mt-3 header-title" contentEditable>The<br/><i>ZincSoft</i><br/>Project</h1>
+                    </noscript>
+                    <h1 class="h4 lh-condensed font-smoothing mt-2 py-1 noscript-compat"><a href="https://www.makeuseof.com/tag/3-ways-javascript-can-used-breach-privacy-security/">Fully noscript compatable!</a></h1>
+                    <div class="clearfix mb-4 py-1">
 						<div class="col-4 sm-width-full left border-top-thin">
 							<div class="table">
 								<div class="inline-block mt-3 mr-1">
@@ -49,14 +106,14 @@
 									</svg>
 								</div>
 								<div class="inline-block mt-3">
-									<a href="https://github.com/ZincSoft/" title="Fork me on GitHub" class="link-social block">
+									<a href="https://github.com/ZincSoft/" title="Follow us on GitHub" class="link-social block">
 										<svg height="32" class="octicon octicon-mark-github header-social" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true">
 											<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
 										</svg>
 									</a>
 								</div>
 							</div>
-							<p class="h4 lh-condensed font-smoothing mt-2 py-1">Rebuilding and replacing security, anonymity, and interconnectivity.</p>
+                            <p class="h4 lh-condensed font-smoothing mt-2 py-1">Rebuilding and replacing security, anonymity, and interconnectivity,<br/><br/>and building the future of open source software and hardware.</p>
 						</div>
 						<div class="col-4 sm-width-full left border-top-thin mt-3 mt-lg-0 ml-lg-4 table">
 							<div class="inline-block mt-3 mr-1">
@@ -65,7 +122,7 @@
 								</svg>
 							</div>
 							<div class="inline-block mt-3">
-								<a href="https://twitter.com/" title="Follow me on twitter" class="link-social block">
+								<a href="https://twitter.com/ZincSoft" title="Follow us on twitter" class="link-social block">
 									<svg height="32" class="header-social" version="1.1" width="32" viewBox="0 0 16 16" aria-hidden="true">
 										<path d="M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z M12,6c0,0.1,0,0.2,0,0.3c0,2.7-2.1,5.8-5.8,5.8
 											c-1.2,0-2.2-0.3-3.1-0.9c0.2,0,0.3,0,0.5,0c1,0,1.8-0.3,2.5-0.9c-0.9,0-1.7-0.6-1.9-1.4c0.1,0,0.3,0,0.4,0c0.2,0,0.4,0,0.5-0.1
@@ -74,7 +131,7 @@
 											c0.4,0,0.8-0.2,1.2-0.3h0C12.7,5.3,12.4,5.7,12,6z"/>
 									</svg>
 								</a>
-							</div>
+                            </div>
 						</div>
 					</div>
 				</div>
@@ -82,19 +139,8 @@
 			<div class="container mx-auto px-2 py-4">
 			</div>
 		</div>
-		<div class="border-top-thin clearfix mt-2 mt-lg-4">
-			<div class="container mx-auto px-2">
-				<p class="col-8 sm-width-full left py-2 mb-0">This project is maintained by <a class="text-accent" href="https://github.com/ZincSoft">ZincSoft</a></p>
-				<ul class="list-reset right clearfix sm-width-full py-2 mb-2 mb-lg-0">
-					<li class="inline-block mr-1">
-						<a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="ZincSoft">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-					</li>
-					<li class="inline-block">
-					</li>
-				</ul>
-			</div>
-		</div>
-	</body>
+	    <!--#include file="footer.html" -->
+    </body>
 </html>
 
 

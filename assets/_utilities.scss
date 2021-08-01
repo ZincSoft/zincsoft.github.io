@@ -43,16 +43,27 @@
 .header-border { border-color: $color-foreground; }
 .header-title {
     color: $color-title;
-    transition: color 2s ease-out 100ms
+    white-space:nowrap;
+    // transition: all .2s ease-in-out;
 }
-.header-title:hover {
-  color: #FF1493;
-}
+// .header-title:hover {
+//   transform: scale(1.1);
+// }
+
 .header-text { color: $color-foreground; }
 .header-social { fill: $color-foreground; }
 .header-social-accent { fill: $color-dot-accent; }
 .header-link:hover { color: $color-nav-link !important; } // used for navigation links on homepage
 .text-accent { color: $color-text-accent; } // used for date in post list and home link
+
+/* Certain text */
+.noscript-compat {
+    transition: all .2s ease-in-out;
+}
+.noscript-compat:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(16px 16px 20px black);
+}
 
 /* Layout utilities */
 .container { max-width: $container-width; }
