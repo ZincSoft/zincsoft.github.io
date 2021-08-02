@@ -69,17 +69,33 @@ a {
 a:hover {
   text-decoration: underline; }
 
-pre {
-  border-left: 8px solid #ddd;
-  margin: 32px 0;
-  padding-left: 16px;
-  width: 75%;
-  overflow-x: auto; }
+/* pre {
+    border-left: $spacer-1 solid $color-border;
+    margin: $spacer-3 0;
+    padding-left: 16px;
+    width: (9 / 12 * 100%); // matches col-9
+    overflow-x: auto;
+} */
+/* code {
+    color: $color-code;
+    font-size: $body-font-size;
+    padding: 1px 0px;
+} */
+pre code {
+  background-color: #eee;
+  border-radius: 25px;
+  display: block;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px; }
 
-code {
-  color: #A10002;
-  font-size: 16px;
-  padding: 1px 0px; }
+.CodeRay {
+  background-color: #eee;
+  border-radius: 25px;
+  display: block;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px; }
 
 .prose a {
   text-decoration: underline dotted; }

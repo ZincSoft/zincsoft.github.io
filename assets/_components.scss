@@ -1,20 +1,39 @@
 // Styling markdown output
 
 // Code formatting
-pre {
+/* pre {
     border-left: $spacer-1 solid $color-border;
     margin: $spacer-3 0;
     padding-left: 16px;
     width: (9 / 12 * 100%); // matches col-9
     overflow-x: auto;
-}
+} */
 
-code {
+/* code {
     color: $color-code;
     font-size: $body-font-size;
     padding: 1px 0px;
+} */
+
+pre code {
+  background-color: #eee;
+  // border: 1px solid #999;
+  border-radius: 25px;
+  display: block;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
+.CodeRay {
+    background-color: #eee;
+  // border: 1px solid #999;
+  border-radius: 25px;
+  display: block;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
 .prose {
 
