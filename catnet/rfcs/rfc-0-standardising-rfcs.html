@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>RFC 0:<br/>Standardizing RFCs</title>
+		<meta name="description" content="Rebuilding and replacing security, anonymity, and interconnectivity.">
+		<link rel="stylesheet" href="https://zincsoft.dev/assets/style.css">
+		<link rel="canonical" href="https://zincsoft.dev/about/">
+		<link rel="alternate" type="application/rss+xml" title="The ZincSoft Project" href="https://zincsoft.dev/feed.xml">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+		<script async defer src="https://buttons.github.io/buttons.js"></script>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+        <script>hljs.highlightAll(hljs.configure({ languages: ["rust", "c", "c++", "python"] }));</script>
+	</head>
+	<body>
+		<header class="border-bottom-thick px-2 clearfix">
+        <!--#include file="/header.html" -->
+        </header>
+		<div>
+			<article class="container mx-auto px-2 mt2 mb4">
+				<header>
+                    <h1 class="h0 py-4 mt-3">RFC 0:<br/>Standardizing RFCs</h1>
+				</header>
+				<div class="col-4 sm-width-full border-top-thin">
+				</div>
+				<div class="prose mb-4 py-4">
+                    <noscript>
+                        <h2 style="padding:25px">Please keep in mind that syntax highlighting is not supported with JavaScript disabled.</h2>
+                    </noscript>
+				    <p>RFC 0:<br />Standardizing RFCs</p>
+
+<h4 id="note-1">Note 1:</h4>
+<p>Sometimes you may have a note. These should be under a #### header. For example, you could say that this RFC for standardising RFCs was taken mainly from <a href="https://datatracker.ietf.org/doc/html/rfc791#section-1.1">here</a> (although this should rather go in the references section).</p>
+
+<h4 id="note-2">Note 2:</h4>
+<p>This is what should actually go in a note: information pretaining to the RFC that should we read first. This RFC is a recomendation, and you can bend it or ignore it on a RFC by RFC basis. It acts only as a basic blueprint.</p>
+
+<h1 id="introduction">Introduction</h1>
+<p>Generally, no text should go beneath &lt;h1&gt; headers (a single # in markup). This text is only here as an example of what not to do.</p>
+
+<p>A two newlines should seperate all headers, and paragraphs with different content.</p>
+
+<h2 id="motivation">Motivation</h2>
+<p>A simple overview. What it is used for, why it was designed.</p>
+
+<h2 id="scope">Scope</h2>
+<p>What is the scope of this protocol? What OSI layer does it operate on? Is it closely tied to another protocol/RFC?</p>
+
+<h2 id="interface">Interface</h2>
+<p>How would this protocol/RFC be used? What other protocols/RFC use it? For example,</p>
+
+<h2 id="operation">Operation</h2>
+<p>How does this protocol/RFC work? Think of it as a more in depth motivation. Provide a high level overview of the protocol/RFC.</p>
+
+<h1 id="overview">Overview</h1>
+
+<h2 id="relation-to-other-rfcs">Relation to other RFCs</h2>
+<p>Provide an explanation on simular Protocols/RFCs, and why this one is diferent (or builds opon the other). You may choose to draw a ASCII chart such as the one below:</p>
+
+<pre><code>+------+ +------+ +------+      +-----+
+|BeeNet| | OMTP | | UFTP |  ... | ... |
++------+ +------+ +------+      +-----+
+      |   |          |             |
+     +-----+      +-----+       +-----+
+     | ATP |      | EDP |  ...  | ... |
+     +-----+      +-----+       +-----+
+        |            |             |
+      +------------------------------+
+      |         Catnet Protocol      |
+      +------------------------------+
+                     |
+         +---------------------------+
+         |   Local Network Protocol  |
+         +---------------------------+
+
+Protocol Relationships
+
+Figure 1.
+</code></pre>
+
+<p>While we are on the topic of code blocks, a code block must be bookended by a newline. You may create one with syntax highlighting like so (the language will be automatically detected):</p>
+
+<pre><code>fn main() {
+    for i in 1..102 {
+        match (i%3, i%5) {
+            (0, 0) =&gt; println!("FizzBuzz"),
+            (0, _) =&gt; println!("Fizz"),
+            (_, 0) =&gt; println!("Buzz"),
+            (_, _) =&gt; println!("{}", i)
+        }
+    }
+}
+</code></pre>
+
+<p>Keep in mind that we use the <code>kramdown</code> markdown parser, so backtick code blocks are not supported. Instead, use tildas (<code>~</code>).</p>
+
+<h2 id="model-of-operation">Model of operation</h2>
+<p>Provide an example of what might happen. Provide some assumptions (e.g. <code>this transmission will involve one intermediate gateway.</code>) if needed, and then provide a step by step example of the intercommunication that might occur. You may also provide a diagram to assist.</p>
+
+<pre><code>Application                                         Application
+   Program                                          Program
+          \                                        /
+       Catnet Module    Catnet Module        Catnet Module
+             \            /       \              /
+            Local Network 1       Local Network 2
+
+Transmission Path
+
+Figure 2
+</code></pre>
+
+<h2 id="function-description">Function description</h2>
+<p>Provide a description of each of the functions that the protocol preforms. For example, if your protocol is capable of addressing and fragmentation, you might have an addressing and fragmentation section explaining in detail what these do.</p>
+
+<h1 id="specification">Specification</h1>
+<p>This is where you provide the really in depth analysis, and actually provide implementation details.</p>
+
+<h1 id="references">References</h1>
+<p>Place any reference here. This may reference an outside website, or another RFC/protocol.</p>
+
+<h1 id="authors">Authors</h1>
+<p>The author. In this case, Milo Banks.</p>
+
+                </div>
+			</article>
+		</div>
+        <!--#include file="/footer.html" -->
+	</body>
+</html>
+
+
