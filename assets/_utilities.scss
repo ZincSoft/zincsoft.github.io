@@ -1,3 +1,25 @@
+@media (min-width: 768px) {
+    .mobile {
+        display: none;
+    }
+}
+
+.zinc-gradient {
+    background: rgb(131,58,180);
+    background: -moz-linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#833ab4",endColorstr="#fcb045",GradientType=1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+.all-title {
+    display: none !important; background: #082032 !important; margin-top: 25px !important; margin-bottom: 25px !important; padding-right: 10% !important; padding-left: 10% !important; border-radius: 75px !important
+}
+
 /* Type utilities */
 .h0 {
   font-size: $h0-mobile;
@@ -35,6 +57,7 @@
 .border-bottom-thin { border-bottom: 1px solid; border-color: currentColor; }
 .border-top-thick { border-top: 2px solid; border-color: currentColor; }
 .border-top-thin { border-top: 1px solid; border-color: currentColor; }
+.manual-border-thin { border-color: currentColor; }
 .border-0 { border: 0; }
 
 

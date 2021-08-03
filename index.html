@@ -22,10 +22,10 @@
 
             // When the website state changes, and we are ready, run the code below.
             document.onreadystatechange = async function () {
-                document.getElementById('dynamic-title').style.removeProperty('display');
-
                 // When the website is complete and ready!
                  if (document.readyState == "complete") {
+                    document.getElementById('dynamic-title-whole').style.removeProperty('display');
+
                     var prev = "";
                     while (true) {
                         // Get a list of possible completions.
@@ -37,7 +37,7 @@
                         if (prev == e) { continue; }
 
                         // Set the title.
-                        document.getElementById('dynamic-title').innerHTML = 'The<br/><i>ZincSoft</i><br/>';
+                        document.getElementById('dynamic-title').innerHTML = '';
                     
                         for (var i = 0; i < e.length; i++) {
                             if (i != 0) {
@@ -73,68 +73,121 @@
 		<div>
 			<header class="header-background">
 				<div class="clearfix border-bottom-thick header-border">
-					<ul class="list-reset right py-1 header-text font-smoothing" style="height:50px; display:flex; align-items:center;"> 
-						<li class="inline-block">
-							<a class="align-middle link-primary header-link mr-2" href="/about/">About</a>
-						</li>
-						<li class="inline-block">
-							<a class="align-middle link-primary header-link mr-2" href="/joining/">Joining</a>
-						</li>
-						<li class="inline-block">
-							<a class="align-middle link-primary header-link mr-2" href="/us/">Our Team (Us)</a>
-						</li>
-						<li class="inline-block">
-							<a class="align-middle link-primary header-link mr-2" href="/projects/">Projects</a>
-						</li>
-					</ul>
+					<ul class="right sm-width-full list-reset right py-1 mt-lg-1 mb-2 mb-lg-1 header-text font-smoothing" style="padding-right: 15px; height:50px; display:flex; align-items:center;"> 
+					 <li class="inline-block">
+					<a class="align-middle link-primary mr-2 mr-lg-0 ml-lg-2" href="/about/">
+					About
+					</a>
+				</li>
+
+                <li class="inline-block">
+					<a class="align-middle link-primary mr-2 mr-lg-0 ml-lg-2" href="/projects/">
+					Projects
+					</a>
+                </li>
+
+                <li class="inline-block">
+					<a class="align-middle link-primary mr-2 mr-lg-0 ml-lg-2" href="/us/">
+					Our Team (Us)
+					</a>
+                </li>
+
+				<li class="inline-block">
+					<a class="align-middle link-primary mr-2 mr-lg-0 ml-lg-2" href="/joining/">
+					Joining
+					</a>
+				</li>
+                
+                <li class="inline-block">
+					<a class="align-middle link-primary mr-2 mr-lg-0 ml-lg-2" href="/support/">
+					Support Us
+					</a>
+				</li>
+
+                <li class"inline-block">
+                    <a class="align-middle link-primary mr-2 mr-lg-0 ml-lg-2" href="/business">
+                    Custom Software
+                    </a>
+                </li>
+   
+                    </ul>
 				</div>
 				<div class="container mx-auto px-2 mb-2 clearfix header-text">
-                    <h1 class="h0 inline-block col-9 sm-width-full py-4 mt-3 header-title" id="dynamic-title" style="display: none !important;">The<br><i>ZincSoft</i><br/><u>Website|</u></h1>
+                    <div class="" id="dynamic-title-whole" style="display: none !important; background: #082032; margin-top: 25px; margin-bottom: 25px; padding-right: 10%; padding-left: 10%; border-radius: 75px">
+                        <h1 class="h0 inline-block col-9 sm-width-full py-4 mt-3 header-title" style="margin-bottom: 0px !important; padding-bottom: 0px !important">
+                            The
+                        </h1>
+                        
+                        <h1 class="zinc-gradient h0 inline-block col-9 sm-width-full py-4 mt-3 header-title" style="margin: 0px !important; padding: 0px !important; word-wrap: break-word !important; display: inline-block;">
+                            <i>ZincSoft</i>
+                        </h1>
+                        
+                        <h1 class="h0 inline-block col-9 sm-width-full py-4 mt-3 header-title" id="dynamic-title" style="margin-top: 0px !important; padding-top: 0px !important">
+                            Website
+                        </h1>
+                    </div>
                     <noscript>
-                        <h1 class="h0 inline-block col-9 sm-width-full py-4 mt-3 header-title" contentEditable>The<br/><i>ZincSoft</i><br/>Project</h1>
+                        <div class="" id="dynamic-title-whole" style="background: #082032; margin-top: 25px; margin-bottom: 25px; padding-right: 10%; padding-left: 10%; border-radius: 75px">
+                        <h1 class="h0 inline-block col-9 sm-width-full py-4 mt-3 header-title" style="margin-bottom: 0px !important; padding-bottom: 0px !important">
+                            The
+                        </h1>
+                        
+                        <h1 class="zinc-gradient h0 inline-block col-9 sm-width-full py-4 mt-3 header-title" style="margin: 0px !important; padding: 0px !important; word-wrap: break-word !important; display: inline-block;">
+                            <i>ZincSoft</i>
+                        </h1>
+                        
+                        <h1 class="h0 inline-block col-9 sm-width-full py-4 mt-3 header-title" id="dynamic-title" style="margin-top: 0px !important; padding-top: 0px !important">
+                            Website
+                        </h1>
+                    </div>
+
                     </noscript>
+
+
                     <h1 class="h4 lh-condensed font-smoothing mt-2 py-1 noscript-compat"><a href="https://www.makeuseof.com/tag/3-ways-javascript-can-used-breach-privacy-security/">100% noscript compatable!</a></h1>
+                    <div class="border-top-thin" style="margin-top: 3%"></div>
                     <div class="clearfix mb-4 py-1">
-						<div class="col-4 sm-width-full left border-top-thin">
+						<div class="sm-width-full left">
 							<div class="table">
 								<div class="inline-block mt-3 mr-1">
-									<svg height="32" class="header-social-accent" version="1.1" width="32" viewBox="0 0 16 16" aria-hidden="true">
+									<svg height="64" class="header-social-accent" version="1.1" width="64" viewBox="0 0 16 16" aria-hidden="true">
 										<circle cx="8" cy="8" r="8"/>
 									</svg>
 								</div>
 								<div class="inline-block mt-3 mr-1">
-									<svg height="32" class="header-social-accent" version="1.1" width="32" viewBox="0 0 16 16" aria-hidden="true">
+									<svg height="64" class="header-social-accent" version="1.1" width="64" viewBox="0 0 16 16" aria-hidden="true">
+										<circle cx="8" cy="8" r="8"/>
+									</svg>
+								</div>
+                                <div class="inline-block mt-3 mr-1">
+									<svg height="64" class="header-social-accent" version="1.1" width="64" viewBox="0 0 16 16" aria-hidden="true">
 										<circle cx="8" cy="8" r="8"/>
 									</svg>
 								</div>
 								<div class="inline-block mt-3">
 									<a href="https://github.com/ZincSoft/" title="Follow us on GitHub" class="link-social block">
-										<svg height="32" class="octicon octicon-mark-github header-social" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true">
+										<svg height="64" class="octicon octicon-mark-github header-social" viewBox="0 0 16 16" version="1.1" width="64" aria-hidden="true">
 											<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
 										</svg>
 									</a>
 								</div>
+                                <div class="inline-block mt-3" style="padding-left: 7px">
+                                    <a href="https://twitter.com/ZincSoft" title="Follow us on twitter" class="link-social block">
+								    	<svg height="64" class="header-social" version="1.1" width="64" viewBox="0 0 16 16" aria-hidden="true">
+										    <path d="M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z M12,6c0,0.1,0,0.2,0,0.3c0,2.7-2.1,5.8-5.8,5.8
+											    c-1.2,0-2.2-0.3-3.1-0.9c0.2,0,0.3,0,0.5,0c1,0,1.8-0.3,2.5-0.9c-0.9,0-1.7-0.6-1.9-1.4c0.1,0,0.3,0,0.4,0c0.2,0,0.4,0,0.5-0.1
+											    c-0.9-0.2-1.6-1-1.6-2v0C3.7,6.9,4,7,4.3,7.1c-0.5-0.4-0.9-1-0.9-1.7c0-0.4,0.1-0.7,0.3-1c1,1.2,2.5,2.1,4.2,2.1
+											    c0-0.2-0.1-0.3-0.1-0.5c0-1.1,0.9-2,2.1-2c0.6,0,1.1,0.2,1.5,0.6c0.5-0.1,0.9-0.3,1.3-0.5c-0.2,0.5-0.5,0.9-0.9,1.1
+											    c0.4,0,0.8-0.2,1.2-0.3h0C12.7,5.3,12.4,5.7,12,6z"/>
+									    </svg>
+								    </a>
+
+                                </div>
 							</div>
-                            <p class="h4 lh-condensed font-smoothing mt-2 py-1">Rebuilding and replacing security, anonymity, and interconnectivity,<br/><br/>and building the future of open source software and hardware.</p>
 						</div>
-						<div class="col-4 sm-width-full left border-top-thin mt-3 mt-lg-0 ml-lg-4 table">
-							<div class="inline-block mt-3 mr-1">
-								<svg height="32" class="header-social" version="1.1" width="32" viewBox="0 0 16 16" aria-hidden="true">
-									<circle cx="8" cy="8" r="8"/>
-								</svg>
-							</div>
-							<div class="inline-block mt-3">
-								<a href="https://twitter.com/ZincSoft" title="Follow us on twitter" class="link-social block">
-									<svg height="32" class="header-social" version="1.1" width="32" viewBox="0 0 16 16" aria-hidden="true">
-										<path d="M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z M12,6c0,0.1,0,0.2,0,0.3c0,2.7-2.1,5.8-5.8,5.8
-											c-1.2,0-2.2-0.3-3.1-0.9c0.2,0,0.3,0,0.5,0c1,0,1.8-0.3,2.5-0.9c-0.9,0-1.7-0.6-1.9-1.4c0.1,0,0.3,0,0.4,0c0.2,0,0.4,0,0.5-0.1
-											c-0.9-0.2-1.6-1-1.6-2v0C3.7,6.9,4,7,4.3,7.1c-0.5-0.4-0.9-1-0.9-1.7c0-0.4,0.1-0.7,0.3-1c1,1.2,2.5,2.1,4.2,2.1
-											c0-0.2-0.1-0.3-0.1-0.5c0-1.1,0.9-2,2.1-2c0.6,0,1.1,0.2,1.5,0.6c0.5-0.1,0.9-0.3,1.3-0.5c-0.2,0.5-0.5,0.9-0.9,1.1
-											c0.4,0,0.8-0.2,1.2-0.3h0C12.7,5.3,12.4,5.7,12,6z"/>
-									</svg>
-								</a>
-                            </div>
-						</div>
+                        
+                        <p class="h4 lh-condensed font-smoothing mt-2 py-1" style="padding-top: 100px">Rebuilding and replacing security, anonymity, and interconnectivity,<br/>and building the future of open source software and hardware.</p>
+                        <h2 class="h2 lh-condensed font-smoothing m2-t py-1"><a href="/about">Learn more about us.</a></h2>
 					</div>
 				</div>
 			</header>
