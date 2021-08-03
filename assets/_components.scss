@@ -15,9 +15,9 @@
     padding: 1px 0px;
 } */
 
+// This will only show with no code enabled. To change the highlight.js theme, go into /assets/code.css
 pre code {
-  background-color: #eee;
-  // border: 1px solid #999;
+  background-color: #eee; // eee
   border-radius: 25px;
   display: block;
   padding: 20px;
@@ -25,15 +25,15 @@ pre code {
   margin-bottom: 20px;
 }
 
-.CodeRay {
-    background-color: #eee;
+/* .CodeRay {
+  background-color: #334756;
   // border: 1px solid #999;
   border-radius: 25px;
   display: block;
   padding: 20px;
   margin-top: 20px;
   margin-bottom: 20px;
-}
+} */
 
 .prose {
 
