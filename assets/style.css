@@ -171,6 +171,26 @@ pre code {
     border-top: 2px solid #082032;
     border-bottom: 2px solid #082032; }
 
+.zinc-gradient {
+  background: #833ab4;
+  background: -moz-linear-gradient(90deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+  background: -webkit-linear-gradient(90deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+  background: linear-gradient(90deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#833ab4",endColorstr="#fcb045",GradientType=1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent; }
+
+.all-title {
+  display: none !important;
+  background: #082032;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding-right: 10%;
+  padding-left: 10%;
+  border-radius: 75px; }
+
 /* Type utilities */
 .h0 {
   font-size: 64px;
@@ -217,6 +237,9 @@ pre code {
 
 .border-top-thin {
   border-top: 1px solid;
+  border-color: currentColor; }
+
+.manual-border-thin {
   border-color: currentColor; }
 
 .border-0 {
