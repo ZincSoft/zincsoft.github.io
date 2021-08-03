@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
         <script>hljs.highlightAll(hljs.configure({ languages: ["rust", "c", "c++", "python"] }));</script>
+        <link rel="stylesheet" href="/assets/code.css">
 	</head>
 	<body>
 		<header class="border-bottom-thick px-2 clearfix">
@@ -29,11 +30,9 @@
                     <h1 class="h0 py-4 mt-3">RFC 0:<br/>Standardizing RFCs</h1>
 				</header>
 				<div class="col-4 sm-width-full border-top-thin">
+                    <h1 style=""><a href="../rfcs">Wish to go back?</a></h1>
 				</div>
 				<div class="prose mb-4 py-4">
-                    <noscript>
-                        <h2 style="padding:25px">Please keep in mind that syntax highlighting is not supported with JavaScript disabled.</h2>
-                    </noscript>
 				    <p>RFC 0:<br />Standardizing RFCs</p>
 
 <h4 id="note-1">Note 1:</h4>
@@ -76,9 +75,9 @@
       |         Catnet Protocol      |
       +------------------------------+
                      |
-         +---------------------------+
-         |   Local Network Protocol  |
-         +---------------------------+
+        +--------------------------+
+        |  Local Network Protocol  |
+        +--------------------------+
 
 Protocol Relationships
 
@@ -87,7 +86,8 @@ Figure 1.
 
 <p>While we are on the topic of code blocks, a code block must be bookended by a newline. You may create one with syntax highlighting like so (the language will be automatically detected):</p>
 
-<pre><code>fn main() {
+<pre><code>/// A simple fizz buzz program.
+fn main() {
     for i in 1..102 {
         match (i%3, i%5) {
             (0, 0) =&gt; println!("FizzBuzz"),

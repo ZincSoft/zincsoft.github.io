@@ -41,9 +41,9 @@ Provide an explanation on simular Protocols/RFCs, and why this one is diferent (
       |         Catnet Protocol      |
       +------------------------------+
                      |
-         +---------------------------+
-         |   Local Network Protocol  |
-         +---------------------------+
+        +--------------------------+
+        |  Local Network Protocol  |
+        +--------------------------+
 
 Protocol Relationships
 
@@ -53,6 +53,7 @@ Figure 1.
 While we are on the topic of code blocks, a code block must be bookended by a newline. You may create one with syntax highlighting like so (the language will be automatically detected):
 
 ~~~
+/// A simple fizz buzz program.
 fn main() {
     for i in 1..102 {
         match (i%3, i%5) {

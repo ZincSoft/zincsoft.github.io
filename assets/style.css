@@ -89,14 +89,15 @@ pre code {
   margin-top: 20px;
   margin-bottom: 20px; }
 
-.CodeRay {
-  background-color: #eee;
+/* .CodeRay {
+  background-color: #334756;
+  // border: 1px solid #999;
   border-radius: 25px;
   display: block;
   padding: 20px;
   margin-top: 20px;
-  margin-bottom: 20px; }
-
+  margin-bottom: 20px;
+} */
 .prose a {
   text-decoration: underline dotted; }
   .prose a:hover {

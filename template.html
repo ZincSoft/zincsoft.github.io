@@ -18,7 +18,6 @@
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
         <script>hljs.highlightAll(hljs.configure({ languages: ["rust", "c", "c++", "python"] }));</script>
-        <link rel="stylesheet" href="/assets/code.css">
 	</head>
 	<body>
 		<header class="border-bottom-thick px-2 clearfix">
@@ -30,9 +29,11 @@
                     <h1 class="h0 py-4 mt-3"><!-- TITLE --></h1>
 				</header>
 				<div class="col-4 sm-width-full border-top-thin">
-                    <h1 style=""><a href="../rfcs">Wish to go back?</a></h1>
 				</div>
 				<div class="prose mb-4 py-4">
+                    <noscript>
+                        <h2 style="padding:25px">Please keep in mind that syntax highlighting is not supported with JavaScript disabled.</h2>
+                    </noscript>
 				    <!-- INSERT_MARKDOWN_TO_HTML_HERE -->
                 </div>
 			</article>
@@ -40,5 +41,4 @@
         <!--#include file="/footer.html" -->
 	</body>
 </html>
-
 

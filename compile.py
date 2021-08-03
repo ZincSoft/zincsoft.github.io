@@ -27,11 +27,12 @@ with open("persistant", "r") as f:
 persistant = json.loads(persistant)
 
 for filename in os.listdir():
-    if (not ".html" in filename) || (not "rfc" in filename):
-        continue
-
+    if not '.html' in filename: continue
+    if not 'rfc' in filename: continue
+    if os.path.exists("markdown/" + filename.replace(".html", ".md")): continue
     os.remove(filename)
 
+## Actually compile the markdown
 os.chdir("markdown")
 for filename in os.listdir():
     if not ".md" in filename:
@@ -64,10 +65,13 @@ for filename in os.listdir():
                 f.truncate();
                 f.write(data)
 
+## Write the persistant
 os.chdir("../")
 with open("persistant", "w") as f:
     f.write(json.dumps(persistant))
 
+
+## Populate the index.html with posts
 posts = ""
 for filename in os.listdir():
     if (not ".html" in filename) or (not 'rfc' in filename):
@@ -82,6 +86,7 @@ for filename in os.listdir():
 
     posts += "<br/>"
 
+## Write the templated index.html
 with open("index.html", "w+") as index:
     with open("index.html.template", "r") as template:
         index.write(template.read().replace("<!-- INSERT_RFCS -->", posts))
