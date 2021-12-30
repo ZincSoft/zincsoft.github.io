@@ -1,4 +1,4 @@
-RFC 0:<br/>Standardizing RFCs
+Standardizing RFCs
 
 #### Note 1:
 Sometimes you may have a note. These should be under a \#\#\#\# header. For example, you could say that this RFC for standardising RFCs was taken mainly from [here](https://datatracker.ietf.org/doc/html/rfc791#section-1.1) (although this should rather go in the references section).
