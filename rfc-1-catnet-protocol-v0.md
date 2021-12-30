@@ -1,4 +1,4 @@
-RFC 1:<br/>Catnet Protocol Version 0 (CPv0)
+Catnet Protocol Version 0 (CPv0)
 
 # Overview
 
