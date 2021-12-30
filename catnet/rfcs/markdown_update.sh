@@ -4,9 +4,10 @@ echo "https://www.atlassian.com/git/tutorials/git-subtree"
 
 old=$(pwd)
 
-cd ../
+cd ../../
 git fetch catnet-rfcs main
-git subtree pull --prefix catnet/rfcs catnet-rfcs main --squash
+git subtree pull --prefix catnet/rfcs/markdown catnet-rfcs main --squash
 cd $old
 
 echo "Done!"
+
