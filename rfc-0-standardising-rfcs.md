@@ -30,11 +30,11 @@ Provide an explanation on simular Protocols/RFCs, and why this one is diferent (
 
 ~~~
 +------+ +------+ +------+      +-----+
-|BeeNet| | OMTP | | UFTP |  ... | ... |
+|Saynet| | OMTP | | UFTP |  ... | ... |
 +------+ +------+ +------+      +-----+
       |   |          |             |
      +-----+      +-----+       +-----+
-     | ATP |      | EDP |  ...  | ... |
+     | ATP |      | UTP |  ...  | ... |
      +-----+      +-----+       +-----+
         |            |             |
       +------------------------------+
