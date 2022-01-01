@@ -1,7 +1,7 @@
 Standardizing RFCs
 
 #### Note 1:
-Sometimes you may have a note. These should be under a \#\#\#\# header. For example, you could say that this RFC for standardising RFCs was taken mainly from [here](https://datatracker.ietf.org/doc/html/rfc791#section-1.1) (although this should rather go in the references section).
+Sometimes you may have a note. These should be under a \#\#\#\# header. For example, you could say that this RFC for standardizing RFCs was taken mainly from [here](https://datatracker.ietf.org/doc/html/rfc791#section-1.1) (although this should rather go in the references section).
 
 #### Note 2:
 This is what should actually go in a note: information pretaining to the RFC that should we read first. This RFC is a recomendation, and you can bend it or ignore it on a RFC by RFC basis. It acts only as a basic blueprint.
