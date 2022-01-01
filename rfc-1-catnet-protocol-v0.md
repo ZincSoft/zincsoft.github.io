@@ -17,7 +17,7 @@ Any node that is not a router.
 A protocol layer immediately above CPv0. Examples are transport protocols such as ATP (Advanced Transmission Protocol) and DTP (Datagram Transmission Protocol), and control protocols such as WUPS (Weird Underlying-transmission Peril System).
 
 ### Link
-A communication facility or medium over which nodes can communicate at the link layer, i.e., the layer immediately below CPv0. Examples are Ethernets (simple or bridged); PPP links; X.25, Frame Relay, or ATM networks; and catnet-layer or higher-layer "tunnels", such as tunnels over CPv0 itself.
+A communication facility or medium over which nodes can communicate at the link layer, i.e., the layer immediately below CPv0. Examples are Ethernets (simple or bridged); PPP links; X.25, Frame Relay, or ATM networks; and Catnet-layer or higher-layer "tunnels", such as tunnels over CPv0 itself.
 
 ### Neighbors 
 Nodes attached to the same link.
@@ -26,10 +26,10 @@ Nodes attached to the same link.
 A node's attachment to a link.
 
 ### Address
-An CPv0-layer identifier for an interface or a set of interfaces.
+An identifier for an interface or a set of interfaces.
 
 ### Packet
-An CPv0 header plus payload.
+An header, complimentary headers, and payload.
 
 ### Link MTU
 The maximum transmission unit, i.e., maximum packet size in octets, that can be conveyed over a link.
@@ -37,11 +37,26 @@ The maximum transmission unit, i.e., maximum packet size in octets, that can be 
 ### Path MTU
 The minimum link MTU of all the links in a path between a source node and a destination node.
 
+### Complimentary Header
+A header located beneath that of the overarching protocol of the datagram. This does not include the header that belongs to an application layer protocol.
+
+### Alias Routing
+A routing technique that improve opon onion routing in terms of speed and security (since we are not bound by the restrictions of the Internet Protocol). Alias routing takes two forms.
+
+#### Mono Aliasing
+The original sender tells a single alias node that they should act as an alias. The alias node acts as both the entrance and exit nodes. The single alias node obviously knows who the sender is and who the recipient is, but:
+
+1. Alias nodes change often.
+2. Communication between sender and destination is encrypted (most likely, maybe forced).
+
+#### Dual Aliasing
+The original sender tells two alias nodes that they should act as aliases. One alias node acts as an entrance node (from the perspective of the destination), and the other one acts as an exit node (with the same perspective). 
+
 ## Motivation
-The Catnet Protocol is designed for use in interconnected systems of packet-switched computer communication networks. Such a system has been dubbed Catnet. The Catnet Protcol provides for transmitting blocks of data called datagrams from sources to destinations, where sources and destinations are hosts identified by fixed length addresses. The Catnet Protcol also provides for fragmentation and reassembly of large datagrams in order to parallize the process of exchange.
+The Catnet Protocol is designed for use in interconnected systems of packet-switched computer communication networks. Such a system has been dubbed Catnet. The Catnet Protocol provides for transmitting blocks of data called datagrams from sources to destinations, where sources and destinations are hosts identified by fixed length addresses. The Catnet Protocol also provides for fragmentation and reassembly of large datagrams in order to parallelize the process of exchange.
 
 ## Scope
-The Catnet Protcol is specifically limited in scope to provide the functions necessary to deliver a package of bits (an Catnet datagram) from a source to a destination over an interconnected system of networks. There are no mechanisms to augment end-to-end data reliability, flow control, sequencing, or other services commonly found in host-to-host protocols. The Catnet Protcol can capitalize on the services of its supporting networks to provide various types and qualities of service.
+The Catnet Protocol is specifically limited in scope to provide the functions necessary to deliver a package of bits (an Catnet datagram) from a source to a destination over an interconnected system of networks. There are no mechanisms to augment end-to-end data reliability, flow control, sequencing, or other services commonly found in host-to-host protocols. The Catnet Protocol can capitalize on the services of its supporting networks to provide various types and qualities of service.
 
 ## Interfaces
 This protocol is called on by host-to-host protocols in an Catnet environment. This protocol calls on local network protocols to carry the Catnet datagram to the next gateway or destination host.
@@ -53,9 +68,9 @@ The Catnet protocol implements two basic functions: addressing and fragmentation
 
 The Catnet modules use the addresses carried in the Catnet header to transmit Catnet datagrams toward their destinations. The selection of a path for transmission is called routing.
 
-The Catnet modules use fields in the Catnet header to fragment and reassemble Catnet datagrams when necessary for transmission.
+The Catnet modules use fields in the fragmentation header to fragment and reassemble Catnet datagrams when necessary for transmission.
 
-The model of operation is that an Catnet module resides in each host engaged in Catnet communication and in each gateway thatinterconnects networks. These modules share common rules for interpreting address fields and for fragmenting and assembling Catnet datagrams. In addition, these modules (especially in gateways) have procedures for making routing decisions and other functions.
+The model of operation is that an Catnet module resides in each host engaged in Catnet communication and in each gateway that interconnects networks. These modules share common rules for interpreting address fields and for fragmenting and assembling Catnet datagrams. In addition, these modules (especially in gateways) have procedures for making routing decisions and other functions.
 
 The Catnet protocol treats each Catnet datagram as an independent entity unrelated to any other Catnet datagram. There are no connections or logical circuits (virtual or otherwise).
 
@@ -136,34 +151,236 @@ The function or purpose of Catnet Protocol is to move datagrams through an inter
 In the routing of messages from one Catnet module to another, datagrams may need to traverse a network whose maximum packet size is smaller than the size of the datagram. To overcome this difficulty, a fragmentation mechanism is provided in the Catnet protocol.
 
 ### Addressing
-A distinction is made between names, addresses, and routes. A name indicates what we seek. An address indicates where it is. A route indicates how to get there. The Catnet protocol deals primarily with addresses. It is the task of higher level (i.e., host-to-host or application) protocols to make the mapping from names to addresses. The Catnet module maps Catnet addresses to local net addresses. It is the task of lower level (i.e., local net or gateways) procedures to make the mapping from local net addresses to routes.
+Addresses are fixed length of 16 octets (128 bits). Each range of bits has a specific part to play. See the simple diagram below. Please note that the top layer is the tens place in the number of octets, the second layer is the ones place in the number of octets (forming one number with layer one), and the bottommost layer is just bites.
 
-Addresses are fixed length of 32 octets (256 bits). The first 42 bits are for galaxy idenification, then 42 bits for solar-group identification, followed by 42 bits for solar systems. After that, comes 12 bits for planets, then 64 bits for which plantary head. Finally, we have 52 bytes decicated to which participant. The reason for created CP "segments" based off of large, inter-planetary scales, is because sooner rather than later, humanity will have a space travel explosion. A large CP with segments decicated to galaxy scales and smaller is required to make sure that we never run out of CP address. It is also required because of huge transmission times between large distances. For example, a protocol to sync data won't speed lots of energy trying to communicate with heads billions (or more) miles away.
+You may notice how similar this is with IPv6 addresses. In fact, they are the same. We don't need to include anything special for the CP protocol, so the CP protocol uses a tried and proven method.
 
-Care must be taken in mapping Catnet addresses to local net addresses; a single physical host must be able to act as if it were several distinct hosts to the extent of using several distinct Catnet addresses. Some hosts will also have several physical interfaces (multi-homing).
+~~~
+                          1 1 1   1 1 1 1
+ 0  1 2 3 4   5 6 7 8   9 0 1 2   3 4 5 6
+ 0 8 6 4 2 0 8 6 4 2 0 8 6 4 2 0 8 6 4 2 
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| Global Prefix | S |   Interface ID    |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+~~~
 
-That is, provision must be made for a host to have several physical interfaces to the network with each having several logical Catnet addresses.
+#### Global Prefix (Global Routing Prefix)
+A value assigned to a site, which is a cluster of subnets.
+
+#### S (Subnet)
+A division of a network into two or more networks. In other words, a logical division of a CP network.
+
+#### Interface ID
+An identifier referring to a particular node.
 
 ### Fragmentation
-Fragmentation of an Catnet datagram is necessary for every datagram, as it prevents spying on the type of internet traffic. This is required because one of CPv0's main focuses is security and anonymity.
+Unlike some other protocols (outside of Catnet), fragmentation of an Catnet datagram is not necessary for every datagram. It would provide minimal security benefit, and make the entire system slower.
 
-An Catnet datagram can be marked "don't fragment." Any Catnet datagram so marked is not to be Catnet fragmented under any circumstances. If Catnet datagram marked don't fragment cannot be delivered to its destination without fragmenting it, it is to be discarded instead.
+An Catnet datagram can be marked "don't fragment." Any Catnet datagram marked so is not to be fragmented under any circumstances. If a datagram marked as don't fragment cannot be delivered to its destination without fragmenting it, it is to be discarded instead. The error will then be reported via WUPS.
 
-Fragmentation, transmission and reassembly across a local network which is invisible to the Catnet protocol module is called catranet fragmentation and may be used, as in the fact the only method to be tested for CPv0 due to lack of funds.
+The Catnet fragmentation and reassembly procedure needs to be able to break a datagram into an almost arbitrary number of pieces that can be later reassembled. The receiver of the fragments uses the identification field to ensure that fragments of different datagrams are not mixed. The fragment offset field tells the receiver the position of a fragment in the original datagram. The fragment offset and length determine the portion of the original datagram covered by this fragment. The more-fragments flag indicates the last fragment. These fields provide sufficient information to reassemble datagrams.
 
-The Catnet fragmentation and reassembly procedure needs to be able to break a datagram into an almost arbitrary number of pieces that can be later reassembled. The receiver of the fragments uses the identification field to ensure that fragments of different datagrams are not mixed. The fragment offset field tells the receiver the position of a fragment in the original datagram. The fragment offset and length determine the portion of the original datagram covered by this fragment. The more-fragments flag indicates (by being reset) the last fragment. These fields provide sufficient information to reassemble datagrams.
+The identification field is used to distinguish the fragments of one datagram from those of another. The originating protocol module of a datagram sets the identification field to a value that must be unique for that source-destination pair and protocol for the time the datagram will be active in the Catnet system. This identifier must remain unique for a reasonable amount of time (exceeding the likely lifetime for a fragment stream). The originating protocol module of a complete datagram sets the more-fragments flag to zero and the fragment offset to zero.
 
-The identification field is used to distinguish the fragments of one datagram from those of another. The originating protocol module of an Catnet datagram sets the identification field to a value that must be unique for that source-destination pair and protocol for the time the datagram will be active in the Catnet system. The originating protocol module of a complete datagram sets the more-fragments flag to zero and the fragment offset to zero.
+The sender and the receiver are the only two entities that play a part in fragmentation. Every other system (such as a head) is oblivious, and delivers the packet without understanding.
 
-To fragment a Catnet datagram, an Catnet host creates two new Catnet datagrams and copies the contents of the Catnet header fields from the long datagram into both new Catnet heads. The data of the long datagram is divided into two portions on a 8 octet (64 bit) boundary (the second portion might not be an integral multiple of 8 octets, but the first must be). Call the number of 8 octet blocks in the first portion NFB (for Number of Fragment Blocks). The first portion of the data is placed in the first new Catnet datagram, and the total length field is set to the length of the first datagram. The is-fragments flag is set to one. The second portion of the data is placed in the second new Catnet datagram, and the total length field is set to the length of the second datagram. The is-fragment flag is also set here. The fragment offset field of the second new Catnet datagram is set to the value of that field in the long datagram plus NFB.
+Fragmented network packets should be sent without awaiting confirmation from the destination as this would be inefficient, and no protocol nor method currently exists for this purpose.
 
-Unlike fragmenting protocols, in say, IPv4, Catnet sends fragmented network packets whenever allowed, and always send at the same time. This means they do not get sent one by one.
-
-This procedure can be generalized for an n-way split, rather than the two-way split described.
-
-To assemble the fragments of an Catnet datagram, an Catnet protocol module (for example at a destination host) combines Catnet datagrams that all have the same value for the four fields: identification, destination, and protocol. The combination is done by placing the data portion of each fragment in the relative position indicated by the fragment offset in that fragment's Catnet header. The first fragment will have the fragment offset zero, and the last fragment will have the more-fragments flag reset to zero.
+To assemble the fragments of an Catnet datagram, a Catnet protocol module (for example at a destination host) combines Catnet datagrams that all have the same value for the four fields: identification, sender, destination, and protocol. The combination is done by placing the data portion of each fragment in the relative position indicated by the fragment offset in that fragment's Catnet header. The first fragment will have the fragment offset zero, and the last fragment will have the more-fragments flag reset to zero.
 
 # Specification
 
-## Header format
-Testing!
+## Header Type Detection
+Every header in the CPv0 protocol (with the exception of the CP protocol itself) has an 8 bit type identifier. Instead of storing this in different places in each preceding header, it is stored at the very beginning of the header in question.
+
+## Complimentary Header Checksum Verification
+Directly after the Header Type Detection Field, we have 16 bits that are a checksum of the header. This applies to complimentary headers only, which means that this does not apply to application layer protocol headers. The checksum is calculated as follows: the checksum field is the 16-bit ones' complement of the ones' complement sum of all 16-bit words in the header. For purposes of computing the checksum, the value of the checksum field is zero.
+
+## More Headers (H)
+More headers is a one bit field denoted by the letter H. 0 means there are no more complimentary headers, and 1 means the opposite.
+
+## Base Header Format
+The following is a simple diagram showing the makeup of the CPv0 header.
+
+~~~
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| Version |   Tc  |          Payload Length       |H|A|adding |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|    Hop Limit    |                Future Use                 |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                             |
++                                                             +
+|                                                             |
++                    Destination Address                      +
+|                                                             |
++                                                             +
+|                                                             |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                             |
++                                                             +
+|                      Sender Address                         |
++             (may be used for alias routing                  +
+|               if no sender is supplied)                     |
++                                                             +
+|                                                             |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+~~~
+
+Note that more detailed specifications are available below this table. The description field in the below table is for a *brief overview*.
+
+| Field | Bits | Description | RFC |
+| :---- | :--: | :---------: | --: |
+| Version | 4 | The version of the CP protocol. | N/A |
+| T | 4 | The traffic class for priority specification. | N/A |
+| Payload Length | 16 | The length of everything below this header.| N/A |
+| H | 1 | Is there a header below this one? | N/A |
+| A | 1 | Is alias routing enabled? | N/A |
+| Hop Limit | 8 | The number of times this packet can be forwarded. | N/A |
+| Destination Address | 128 | The destination of the packet (ish). | N/A |
+| Sender Address | 128 | The sender of the packet. Optional with alias header. | N/A |
+
+### Version
+This field should stay the same across every CP protocol revision/version. Instead of a single bit referring to the version (making only 4 possible), this is interpreted as a number in binary form (16 possible). The version number in the header matches the version of the protocol (0 is 0, 1 is 1, etc...).
+
+### Traffic Class (T)
+Specifies the quality of service that is desired. Each bit depicts the requested quality of a certain aspect of the network (0 being normal and 1 being high).
+
+| Bit | Description              |
+| :-- | ----------:              |
+| 0   | Must be 0. Sanity check. |
+| 1   | Throughput               |
+| 2   | Delay                    |
+| 3   | Reliability              |
+
+As mentioned, bit 0 must be 0. This serves as a very basic (and most likely useless) sanity check. It is up to the implementation on whether to implement this, because it isn't strictly required.
+
+
+### Payload Length
+The length of all the data contained underneath the CP header. Includes the complimentary headers.
+
+### More Headers (H)
+See the "More Headers (H)" segment above the "Base Header Format" section.
+
+### Alias Routing Enabled (A)
+Is this bit is set to 1, the sender field is treated as the alias header.
+
+### Hop Limit
+The number of times that a packet should be relayed through a node. This number should be decremented by one for every hop, and once this number reaches 0 it should be discarded
+
+## Alias Header Format
+
+## Header Type Identifier
+This header uses a header type identifier that is equal to the number 1 (00000001). See "Header Type Detection".
+
+## Alias Header Format
+The following is a simple diagram showing the makeup of the alias header. Unlike every other header, this one goes in the sender field of the CP header if the A bit is set to 1.
+
+~~~
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| Type Identifier |           Checksum            |H|Alias Pos|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                             |
++                                                             +
+|                                                             |
++                       Alias Address                         +
+|                                                             |
++                                                             +
+|                                                             |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
++                                                             +
+|                    Verification Token                       |
++                                                             +
+|                                                             |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+~~~
+
+
+### Type Identifier
+See directly below the header specification segment. This header uses a header type identifier that is equal to the number 1 (00000001). See "Header Type Detection".
+
+### Checksum
+See directly below the type identifier segment.
+
+### More Headers (H)
+See the "More Headers (H)" segment above the "Base Header Format" section.
+
+### Alias Position (Alias Pos)
+The position of the alias. Below is a table explaining the meaning of each bit.
+
+| Bit | Description |
+| :-- | ----------: |
+| 0 | Type of alias routing. |
+| 1 | Entrance alias node. | 
+| 2 | Exit alias node. |
+| 3-4 | Reserved |
+
+#### Bit 0: Type of alias routing
+Set to 0, this means that mono alias routing is in effect. Vice versa, when the bit is set to 1 it means that dual alias routing is being used.
+
+### Alias Address
+The CP address of the alias. Since this packet is sent to the destination, they have no idea who actually sent the packet, and are forced to send to the alias if they want to send it at all. The address that this points to should refer to a head that has been notified of its alias status via the LMK protocol.
+
+### Verification Token
+To make sure that no one is sending faulty data, a verification token is used. If the original sender receives a verification token that does not match the one they sent, the data has been tampered with, and should be discarded immediately. This is only really necessary in a non-encrypted environment, as the "man in the middle" wouldn't be able to tamper with the data anyways without knowing the sender's private key.  
+
+## Fragment Header Format
+The following is a simple diagram showing the makeup of the fragment header.
+
+~~~
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| Type Identifier |           Checksum            |H|F|Padding|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|         Fragment Offset         |     Stream (srm) Token    |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| Srm Token |         Reserved (may be excluded)              |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+~~~
+
+### Type Identifier
+See directly below the header specification segment. This header uses a header type identifier that is equal to the number 2 (00000010). See "Header Type Detection".
+
+### Checksum
+See directly below the type identifier segment.
+
+### Final (F)
+Set to 0 if there is more fragments to come, and vice versa, with 1 being set to denote that this is the last fragment.
+
+### More Headers (H)
+See the "More Headers (H)" segment above the "Base Header Format" section.
+
+### Fragment Offset
+The offset, in 8-bit octet units, of the data following this header, relative to the start of the fragmentable part of the original header. Because they are measured in 8-octet units, every bit is equal to 8-octet units (1 \* 8 \* 8 = 64). Each fragmentable part of a packet must be a multiple of 64 bits. This means that the maximum size of all the fragment data (once they have been defragmented) is 70464 bits (16 bit max = 65535 -> 65535 \* 8 \* 8 = 4194240). This may seem like a very large maximum stream size, but we might as well put that extra space to good use.
+
+#### Fragmentable Segment vs Unfragmentable Segment
+In the above section labeled "Fragment Offset", the term fragmentable segment was used. While this is defined in the vocabulary section, here is a helpful diagram.
+
+~~~
++------------------+----------------------//-----------------------+
+|  Unfragmentable  |                 Fragmentable                  |
+|       Part       |                     Part                      |
++------------------+----------------------//-----------------------+
+~~~
+
+The unfragmentable part includes the complimentary headers, everything after that (everything after the H bit has been set to 0 in the final complimentary header) counts as fragmentable. Each packet has a unfragmentable part and a fragmentable part. Keep in mind that even a packet with a fragment header still has to include other headers, as they are not inherited from the original fragment.
+
+### Stream Token (Srm Token)
+A token that must be unique from any other stream token used recently.
+
+"Recently" means within the maximum likely lifetime of a packet including transit time from source to destination and time spent awaiting reassembly with other fragments of the same packet. However, it is not required that a source node know the maximum packet lifetime.  Rather, it is assumed that the requirement can be met by maintaining the Identification value as a simple, 32-bit, "wrap-around" counter, incremented each time a packet must be fragmented.  It is an implementation choice whether to maintain a single counter for the node or multiple counters, e.g., one for each of the node's possible source addresses, or one for each active (source address, destination address)combination.
+
+# References
+[Internet RFC 791](https://datatracker.ietf.org/doc/html/rfc791)
+
+[Internet RFC 2460](https://datatracker.ietf.org/doc/html/rfc2460)
+
+##### **Some text was copied verbatim!**
+The only text that was copied were explanations of common networking terms and practices.
+
+# Authors
+Milo Banks
