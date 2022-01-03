@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>CNMP Version 0 (CNMPv0)</title>
+		<meta name="description" content="Rebuilding and replacing security, anonymity, and interconnectivity.">
+		<link rel="stylesheet" href="/assets/style.css">
+		<link rel="canonical" href="/about/">
+		<link rel="alternate" type="application/rss+xml" title="The ZincSoft Project" href="/feed.xml">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+		<script async defer src="https://buttons.github.io/buttons.js"></script>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+        <script>hljs.highlightAll(hljs.configure({ languages: ["rust", "c", "c++", "python"] }));</script>
+        <link rel="stylesheet" href="/assets/code.css">
+	</head>
+	<body>
+		<header class="border-bottom-thick px-2 clearfix">
+        <!--#include file="/header.html" -->
+        </header>
+		<div>
+			<article class="container mx-auto px-2 mt2 mb4">
+				<header>
+                    <h1 class="h0 py-4 mt-3">CNMP Version 0 (CNMPv0)</h1>
+				</header>
+				<div class="col-4 sm-width-full border-top-thin">
+                    <h1 style=""><a href="../rfcs">Wish to go back?</a></h1>
+				</div>
+				<div class="prose mb-4 py-4">
+				    <p>CNMP Version 0 (CNMPv0)</p>
+
+<p>CNMPv0</p>
+
+<h1 id="introduction">Introduction</h1>
+<p>The CNMP (Catnet Non-application Message Protocol) protocol is used as a device for sending information and error messages from a sender to a receiver. The data transmitted through this protocol is not necessarily useless to the end-user, only the Catnet module that underlies it. It should not be used to transmit data relevant to the user without <em>excellent reason</em> (and instead should go over an application layer protocol such as ATP/UTP).</p>
+
+<p>This protocol is used for denoting errors (such as if a host could not be reached or if a service is unavailable) and sending/broadcasting information and requests. Such requests may be an echo request (a ping/request) or a router broadcast (information).</p>
+
+<h2 id="terminology">Terminology</h2>
+
+<h3 id="error">Error</h3>
+<p>An error was encountered trying to fulfil another protocol (excluding CNMP). <em>A CNMP error should never be sent as a response to a CNMP error</em></p>
+
+<h3 id="information-request">Information Request</h3>
+<p>Information (information in the form of the CNMP protocol) that requests information.</p>
+
+<h3 id="information-send">Information Send</h3>
+<p>Information is sent in response to information (from any protocol, including CNMP).</p>
+
+<h2 id="motivation">Motivation</h2>
+<p>CNMR is a protocol that uses CP intending to deliver simple messages about the requested state of the network or the failure of packet routing/delivery.</p>
+
+<h2 id="scope">Scope</h2>
+<p>While CNMP technically uses IP, it is used in part to diagnose and describe errors relating to it. For clarity, it is described as being on the network layer.</p>
+
+<p>CNMP is very closely tied to the CP protocol (RFC 1).</p>
+
+<h2 id="interface">Interface</h2>
+<p>Here are <em>some</em> examples concerning the two prominent use cases for this protocol.</p>
+
+<h3 id="error-denoting">Error Denoting</h3>
+
+<ol>
+  <li>Destination unreachable</li>
+  <li>ATP packet resend request</li>
+</ol>
+
+<h3 id="solicited-information-request">Solicited Information Request</h3>
+
+<ol>
+  <li>ATP packet resend request</li>
+  <li>ATP packet faulty token</li>
+</ol>
+
+<h3 id="unsolicited-information-request">Unsolicited Information Request</h3>
+
+<ol>
+  <li>Echo (ping)</li>
+  <li>Router solicitation</li>
+</ol>
+
+<h3 id="solicited-information-send">Solicited Information Send</h3>
+
+<ol>
+  <li>Echo Reply</li>
+  <li>Alias relations (incoming)</li>
+</ol>
+
+<h3 id="unsolicited-information-send">Unsolicited Information Send</h3>
+
+<ol>
+  <li>Alias relations (incoming)</li>
+  <li>Echo request (ping request)</li>
+</ol>
+
+<h1 id="overview">Overview</h1>
+
+<h2 id="relation-to-other-rfcs">Relation to other RFCs</h2>
+
+<p>This RFC runs on top of the CP protocol (as mentioned earlier). Typically, for the error reporting part of this protocol, it will be in direct response to another protocol (where that other protocol is not CNMP).</p>
+
+<p>Different RFCs should be written for every code carried inside a CNMP header. For example, the APRR protocol’s RFC specifies what code is used to identify it and what extra data should be included (if any).</p>
+
+<p>In short, protocols use CNMP to send back elementary information that is simple enough it does not need its own protocol. It is also used to report errors about the network and failures concerning other protocols.</p>
+
+<p>Below is a list of all the RFCs that use CNMP.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Name</th>
+      <th style="text-align: right">RFC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">APRR</td>
+      <td style="text-align: right">6</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="reliability">Reliability</h2>
+
+<p>CNMP provides no promise of reliability. A checksum is provided but is not required to act upon. There is no mechanism for requesting the resending of a CNMP packet, as CNMP is only for sending errors and information (which are not strictly required). As such, these may go undelivered. Any Catnet module that implements CNMP (which all are required to) should have a timeout mechanism (implementation specifics are left up to the implementation).</p>
+
+<p>Because the CP protocol has fragmentation capabilities, CNMP packets should only be sent for the original packet, not subsequent fragments, to avoid packet flooding.</p>
+
+<h1 id="specification">Specification</h1>
+
+<h2 id="base-header-format">Base Header Format</h2>
+<p>The following is a simple diagram showing the makeup of the CNMP protocol.</p>
+
+<pre><code> 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| Type Identifier |           Checksum            |     Type    |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|  Code   |                                                     |
++-+-+-+-+-+                  Unused                             +
+|                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                             Port                              |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</code></pre>
+
+<h3 id="type-identifier">Type Identifier</h3>
+<p>See RFC 1 header requirements.</p>
+
+<h3 id="checksum">Checksum</h3>
+<p>See RFC 1 header requirements.</p>
+
+<h3 id="type">Type</h3>
+<p>A number representing the class of the message.</p>
+
+<h3 id="code">Code</h3>
+<p>A number giving more detail into the class of the message.</p>
+
+<h3 id="unused">Unused</h3>
+<p>This may be used to provide extra context. Not required, but the amount of space used here should be kept small; overwise, another protocol should be considered for use.</p>
+
+<h3 id="port">Port</h3>
+<p>The port that the CNMP packet should be forwarded to. This forwarding is done inside the computer.</p>
+
+<h1 id="reference">Reference</h1>
+
+<ol>
+  <li>Catnet RFC 4</li>
+  <li>Catnet RFC 5</li>
+  <li>Catnet RFC 6</li>
+  <li>Internet RFC 792</li>
+</ol>
+
+<h1 id="authors">Authors</h1>
+<p>Milo Banks</p>
+
+                </div>
+			</article>
+		</div>
+        <!--#include file="/footer.html" -->
+	</body>
+</html>
+
+
