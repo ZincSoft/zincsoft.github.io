@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>UTP Version 0 (UTPv0)</title>
+		<meta name="description" content="Rebuilding and replacing security, anonymity, and interconnectivity.">
+		<link rel="stylesheet" href="/assets/style.css">
+		<link rel="canonical" href="/about/">
+		<link rel="alternate" type="application/rss+xml" title="The ZincSoft Project" href="/feed.xml">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+		<script async defer src="https://buttons.github.io/buttons.js"></script>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+        <script>hljs.highlightAll(hljs.configure({ languages: ["rust", "c", "c++", "python"] }));</script>
+        <link rel="stylesheet" href="/assets/code.css">
+	</head>
+	<body>
+		<header class="border-bottom-thick px-2 clearfix">
+        <!--#include file="/header.html" -->
+        </header>
+		<div>
+			<article class="container mx-auto px-2 mt2 mb4">
+				<header>
+                    <h1 class="h0 py-4 mt-3">UTP Version 0 (UTPv0)</h1>
+				</header>
+				<div class="col-4 sm-width-full border-top-thin">
+                    <h1 style=""><a href="../rfcs">Wish to go back?</a></h1>
+				</div>
+				<div class="prose mb-4 py-4">
+				    <p>UTP Version 0 (UTPv0)</p>
+
+<h1 id="introduction">Introduction</h1>
+<p>The Uncontrolled user-datagram Transmission Protocol (UTP) is defined to transport datagrams over a network. The underlying protocol is assumed to be the CP protocol (residing on layer 3).</p>
+
+<p>UTP is a protocol that resides on the transport layer. As such, it is used to send datagrams from program to program. The protocol provides no protection or security besides the mandatory checksum (discussed in the specification). If an application needs ordered and reliable data, use another protocol such as the Advanced Transmission Protocol (ATP).</p>
+
+<p>In reality, UTP is an unreliable datagram transmission mechanism but lays the foundation for other transport protocols. UTP is a protocol that deals with ports, and that is it. It can be used for data transmission, or another protocol can take advantage of the base functionality that it already provides.</p>
+
+<h2 id="motivation">Motivation</h2>
+<p>A protocol that is capable of transmitting sizeable data over CP.</p>
+
+<h2 id="scope">Scope</h2>
+<p>This protocol sits directly on top of CP. Below its own header either resides the header of another application/transport layer protocol or a datagram itself.</p>
+
+<h2 id="interface">Interface</h2>
+<p>UTP is the only transport protocol (capable of supporting an application protocol) that sits directly on top of CP. Every other transport protocol (capable of supporting an application protocol) relies on UTP.</p>
+
+<h1 id="specification">Specification</h1>
+
+<h2 id="base-header-format">Base Header Format</h2>
+<p>The following is a simple diagram showing the makeup of the UTP protocol.</p>
+
+<pre><code> 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      See HHS                      |  Padding  |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|          Source Port          |       Destination Port        |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|           Datagram Length             |        Reserved       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</code></pre>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Field</th>
+      <th style="text-align: center">Bits</th>
+      <th style="text-align: center">Description</th>
+      <th style="text-align: right">RFC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Source Port</td>
+      <td style="text-align: center">16</td>
+      <td style="text-align: center">The originating port, except for in alias routing.</td>
+      <td style="text-align: right">N/A</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Destination Port</td>
+      <td style="text-align: center">16</td>
+      <td style="text-align: center">The destination port.</td>
+      <td style="text-align: right">N/A</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Datagram Length</td>
+      <td style="text-align: center">20</td>
+      <td style="text-align: center">The length of the datagram.</td>
+      <td style="text-align: right">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="see-hhs">See HHS</h3>
+<p>See RFC 9.</p>
+
+<h3 id="source-port">Source Port</h3>
+<p>The port that this packet was sent from.</p>
+
+<p>If this packet was sent encapsulated in a CP packet with alias routing enabled, this source port should be set to the port that the alias is listing to.</p>
+
+<h3 id="destination-port">Destination Port</h3>
+<p>The port that this packet should be sent to once it reaches its target destination.</p>
+
+<h3 id="datagram-length">Datagram Length</h3>
+<p>The length of everything else, including the complimentary headers.</p>
+
+<h2 id="extensibility">Extensibility</h2>
+<p>As mentioned earlier/above, UTP is the only transport protocol (capable of supporting an application protocol) that sits directly on CP. This would be a problem since UTP provides no data reliability if it was not for the intended extensibility of UTP. Remember that UTP follows the header hierarchy system (HHS, 9).</p>
+
+<p>Each UTP complimentary header is defined in its own RFC. Below is a list.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Name</th>
+      <th style="text-align: right">RFC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">ATP</td>
+      <td style="text-align: right">5</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="reference">Reference</h1>
+
+<ol>
+  <li>Catnet RFC 5</li>
+  <li>Catnet RFC 9</li>
+  <li>Catnet RFC 1</li>
+  <li>Internet RFC 768</li>
+</ol>
+
+<h1 id="authors">Authors</h1>
+<p>Milo Banks</p>
+
+                </div>
+			</article>
+		</div>
+        <!--#include file="/footer.html" -->
+	</body>
+</html>
+
+

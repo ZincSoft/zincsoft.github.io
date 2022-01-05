@@ -1,12 +1,6 @@
 require 'kramdown'
 require 'ruby-progressbar'
 
-def smart_case(field)
-  field.to_s.split(' ').map { |word|
-    /[A-Z][A-Z]+/.match(word) ? word : word.downcase
-  }.join(' ')
-end
-
 def supply
   puts 'Please supply a subcommand.'
 end
@@ -53,15 +47,12 @@ def get_new_index
     end
 
     current = template_entry
+    markdown_file = "./markdown/" + file.gsub(".html", ".md")
+    markdown_data = File.open("." + markdown_file).read
 
     current = current.gsub('<!-- HTML FILE -->', './html/' + file)
-
-    current = current.gsub('<!-- MARKDOWN FILE -->', './markdown/' + file.gsub('.html', '.md'))
-
-    current = current.gsub('<!-- TITLE -->', file.split('-').drop(2)
-      .join(" ")
-      .gsub('.html', ''))
-
+    current = current.gsub('<!-- MARKDOWN FILE -->', markdown_file)
+    current = current.gsub('<!-- TITLE -->', markdown_data.lines.first)
     current = current.gsub('<!-- RFC -->', file.split('-')[1])
 
     total.prepend(current)
