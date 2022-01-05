@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Header Hierarchy System (HHS)</title>
+		<meta name="description" content="Rebuilding and replacing security, anonymity, and interconnectivity.">
+		<link rel="stylesheet" href="/assets/style.css">
+		<link rel="canonical" href="/about/">
+		<link rel="alternate" type="application/rss+xml" title="The ZincSoft Project" href="/feed.xml">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+		<script async defer src="https://buttons.github.io/buttons.js"></script>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+        <script>hljs.highlightAll(hljs.configure({ languages: ["rust", "c", "c++", "python"] }));</script>
+        <link rel="stylesheet" href="/assets/code.css">
+	</head>
+	<body>
+		<header class="border-bottom-thick px-2 clearfix">
+        <!--#include file="/header.html" -->
+        </header>
+		<div>
+			<article class="container mx-auto px-2 mt2 mb4">
+				<header>
+                    <h1 class="h0 py-4 mt-3">Header Hierarchy System (HHS)</h1>
+				</header>
+				<div class="col-4 sm-width-full border-top-thin">
+                    <h1 style=""><a href="../rfcs">Wish to go back?</a></h1>
+				</div>
+				<div class="prose mb-4 py-4">
+				    <p>Header Hierarchy System (HHS)</p>
+
+<h1 id="introduction">Introduction</h1>
+<p>Deviating from the internet protocols, the Catnet protocols try to reduce the number of protocols instead of following the DRY principle more closely. Take UDP and TCP as an example. They both have duplicated fields and can share code, not to mention performing the same task. Why have two protocols when one will suffice?</p>
+
+<p>The Header Hierarchy System (HHS) specifies complimentary headers and how they are integrated.</p>
+
+<h2 id="vocabulary">Vocabulary</h2>
+
+<h3 id="header">Header</h3>
+<p>“Metadata” that goes at the beginning of a protocol.</p>
+
+<h3 id="complimentary-header">Complimentary Header</h3>
+<p>A header that compliments a base one and provides optional information. For example, ATP is a complimentary header to UTP because ATP specifies optional more information.</p>
+
+<h3 id="dry">DRY</h3>
+<p>“Don’t repeat yourself.”</p>
+
+<blockquote>
+  <p>The DRY principle [states], “Every piece of knowledge must have a single, unambiguous, authoritative representation within a system.” The principle has been formulated by Andy Hunt and Dave Thomas in their book The Pragmatic Programmer. They [broadly apply it] to include “database schemas, test plans, the build system, even documentation.” When the DRY principle is applied successfully, a modification of any single element of a system does not require a change in other logically unrelated elements. Additionally, [logically related elements] all change predictably and uniformly and are thus kept in sync.</p>
+</blockquote>
+
+<p>– <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">Wikipedia</a></p>
+
+<h2 id="motivation">Motivation</h2>
+<p>Instead of specifying these same rules inside each RFC that takes advantage of this functionality, a new RFC was created not to repeat ourselves. Fitting, isn’t it?</p>
+
+<h2 id="scope">Scope</h2>
+<p>The HHS system applies to every RFC that seeks to take advantage of it, so long as it is a protocol and is capable of doing so.</p>
+
+<h1 id="specification">Specification</h1>
+
+<h3 id="base-header-fragment-format">Base Header Fragment Format</h3>
+<p>The following is a simple diagram showing the fragment that every HHS compatible header needs to follow.</p>
+
+<pre><code> 0                   1                   2
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| Type Identifier |           Checksum            |H|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</code></pre>
+
+<h4 id="type-identifier">Type Identifier</h4>
+<p>This 9-bit number is unique for every HHS compliant protocol.</p>
+
+<h4 id="checksum">Checksum</h4>
+<p>This checksum is created with this header and all the data below it. In this case, data may refer to another header (complimentary) or just a datagram.</p>
+
+<p>The checksum is calculated as follows: the checksum field is the 16-bit ones’ complement of the ones’ complement sum of all 16-bit words in the header. For purposes of computing the checksum, the value of the checksum field is zero.</p>
+
+<h4 id="h-next-header">H (Next Header)</h4>
+<p>A single bit specifying if there is another complimentary header after this one. If not, expect a datagram.</p>
+
+<h1 id="authors">Authors</h1>
+<p>Milo Banks</p>
+
+                </div>
+			</article>
+		</div>
+        <!--#include file="/footer.html" -->
+	</body>
+</html>
+
+

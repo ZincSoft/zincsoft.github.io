@@ -35,10 +35,8 @@
 				<div class="prose mb-4 py-4">
 				    <p>CNMP Version 0 (CNMPv0)</p>
 
-<p>CNMPv0</p>
-
 <h1 id="introduction">Introduction</h1>
-<p>The CNMP (Catnet Non-application Message Protocol) protocol is used as a device for sending information and error messages from a sender to a receiver. The data transmitted through this protocol is not necessarily useless to the end-user, only the Catnet module that underlies it. It should not be used to transmit data relevant to the user without <em>excellent reason</em> (and instead should go over an application layer protocol such as ATP/UTP).</p>
+<p>The CNMP (Catnet Non-application Message Protocol) protocol is used as a device for sending information and error messages from a sender to a receiver. The data transmitted through this protocol is not necessarily useless to the end-user, only the Catnet module that underlies it. It should not be used to transmit data relevant to the user without <em>excellent reason</em> (and instead should go over an transport layer protocol such as ATP/UTP).</p>
 
 <p>This protocol is used for denoting errors (such as if a host could not be reached or if a service is unavailable) and sending/broadcasting information and requests. Such requests may be an echo request (a ping/request) or a router broadcast (information).</p>
 
@@ -140,21 +138,47 @@
 <pre><code> 0                   1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-| Type Identifier |           Checksum            |     Type    |
+|                      See HHS                      |   Type    |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|  Code   |                                                     |
-+-+-+-+-+-+                  Unused                             +
-|                                                               |
+|   Code    |             Port              |       Unused       -&gt;
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|                             Port                              |
+                             Unused                             |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 </code></pre>
 
-<h3 id="type-identifier">Type Identifier</h3>
-<p>See RFC 1 header requirements.</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Field</th>
+      <th style="text-align: center">Bits</th>
+      <th style="text-align: center">Description</th>
+      <th style="text-align: right">RFC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Type</td>
+      <td style="text-align: center">6</td>
+      <td style="text-align: center">Class of message.</td>
+      <td style="text-align: right">N/A</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Code</td>
+      <td style="text-align: center">6</td>
+      <td style="text-align: center">Details of class.</td>
+      <td style="text-align: right">N/A</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Port</td>
+      <td style="text-align: center">16</td>
+      <td style="text-align: center">Identifies the fragment stream.</td>
+      <td style="text-align: right">N/A</td>
+    </tr>
+  </tbody>
+</table>
 
-<h3 id="checksum">Checksum</h3>
-<p>See RFC 1 header requirements.</p>
+<h3 id="see-hhs">See HHS</h3>
+<p>See RFC 9.</p>
 
 <h3 id="type">Type</h3>
 <p>A number representing the class of the message.</p>
@@ -162,11 +186,11 @@
 <h3 id="code">Code</h3>
 <p>A number giving more detail into the class of the message.</p>
 
-<h3 id="unused">Unused</h3>
-<p>This may be used to provide extra context. Not required, but the amount of space used here should be kept small; overwise, another protocol should be considered for use.</p>
-
 <h3 id="port">Port</h3>
 <p>The port that the CNMP packet should be forwarded to. This forwarding is done inside the computer.</p>
+
+<h3 id="unused">Unused</h3>
+<p>This may be used to provide extra context. Not required, but the amount of space used here should be kept small; overwise, another protocol should be considered for use.</p>
 
 <h1 id="reference">Reference</h1>
 
