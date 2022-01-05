@@ -1,9 +1,7 @@
 CNMP Version 0 (CNMPv0)
 
-CNMPv0
-
 # Introduction
-The CNMP (Catnet Non-application Message Protocol) protocol is used as a device for sending information and error messages from a sender to a receiver. The data transmitted through this protocol is not necessarily useless to the end-user, only the Catnet module that underlies it. It should not be used to transmit data relevant to the user without *excellent reason* (and instead should go over an application layer protocol such as ATP/UTP).
+The CNMP (Catnet Non-application Message Protocol) protocol is used as a device for sending information and error messages from a sender to a receiver. The data transmitted through this protocol is not necessarily useless to the end-user, only the Catnet module that underlies it. It should not be used to transmit data relevant to the user without *excellent reason* (and instead should go over an transport layer protocol such as ATP/UTP).
 
 This protocol is used for denoting errors (such as if a host could not be reached or if a service is unavailable) and sending/broadcasting information and requests. Such requests may be an echo request (a ping/request) or a router broadcast (information).
 
@@ -85,21 +83,22 @@ The following is a simple diagram showing the makeup of the CNMP protocol.
  0                   1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-| Type Identifier |           Checksum            |     Type    |
+|                      See HHS                      |   Type    |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|  Code   |                                                     |
-+-+-+-+-+-+                  Unused                             +
-|                                                               |
+|   Code    |             Port              |       Unused       ->
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|                             Port                              |
+                             Unused                             |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ~~~
 
-### Type Identifier
-See RFC 1 header requirements.
+| Field | Bits | Description | RFC |
+| :---- | :--: | :---------: | --: |
+| Type | 6 | Class of message. | N/A |
+| Code | 6 | Details of class. | N/A|
+| Port | 16 | Identifies the fragment stream. | N/A |
 
-### Checksum
-See RFC 1 header requirements.
+### See HHS
+See RFC 9.
 
 ### Type
 A number representing the class of the message.
@@ -107,11 +106,11 @@ A number representing the class of the message.
 ### Code
 A number giving more detail into the class of the message.
 
-### Unused
-This may be used to provide extra context. Not required, but the amount of space used here should be kept small; overwise, another protocol should be considered for use.
-
 ### Port
 The port that the CNMP packet should be forwarded to. This forwarding is done inside the computer.
+
+### Unused
+This may be used to provide extra context. Not required, but the amount of space used here should be kept small; overwise, another protocol should be considered for use.
 
 # Reference
 
