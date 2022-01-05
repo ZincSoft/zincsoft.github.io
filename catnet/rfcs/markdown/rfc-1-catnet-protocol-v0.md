@@ -38,7 +38,7 @@ The maximum transmission unit, i.e., maximum packet size in octets, that can be 
 The minimum link MTU of all the links in a path between a source node and a destination node.
 
 ### Complimentary Header
-A header located beneath that of the overarching protocol of the datagram. This does not include the header that belongs to an application layer protocol.
+A header located beneath that of the overarching protocol of the datagram. This does not include the header that belongs to an application/transport layer protocol.
 
 ### Alias Routing
 A routing technique that improve opon onion routing in terms of speed and security (since we are not bound by the restrictions of the Internet Protocol). Alias routing takes two forms.
@@ -190,23 +190,14 @@ To assemble the fragments of an Catnet datagram, a Catnet protocol module (for e
 
 # Specification
 
-## Header Type Detection
-Every header in the CPv0 protocol (with the exception of the CP protocol itself) has an 8 bit type identifier. Instead of storing this in different places in each preceding header, it is stored at the very beginning of the header in question.
-
-## Complimentary Header Checksum Verification
-Directly after the Header Type Detection Field, we have 16 bits that are a checksum of the header. This applies to complimentary headers only, which means that this does not apply to application layer protocol headers. The checksum is calculated as follows: the checksum field is the 16-bit ones' complement of the ones' complement sum of all 16-bit words in the header. For purposes of computing the checksum, the value of the checksum field is zero.
-
-## More Headers (H)
-More headers is a one bit field denoted by the letter H. 0 means there are no more complimentary headers, and 1 means the opposite.
-
 ## Base Header Format
-The following is a simple diagram showing the makeup of the CPv0 header.c
+The following is a simple diagram showing the makeup of the CPv0 header.
 
 ~~~
  0                   1                   2                   3
- 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-| Version |   Tc  |          Payload Length       |H|A| Padding |
+| Version |   T   |          Payload Length       |H|A| Padding |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |    Hop Limit    |                 Future Use                  |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -228,21 +219,19 @@ The following is a simple diagram showing the makeup of the CPv0 header.c
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ~~~
 
-Note that more detailed specifications are available below this table. The description field in the below table is for a *brief overview*.
-
 | Field | Bits | Description | RFC |
 | :---- | :--: | :---------: | --: |
-| Version | 4 | The version of the CP protocol. | N/A |
+| Version | 5 | The version of the CP protocol. | N/A |
 | T | 4 | The traffic class for priority specification. | N/A |
 | Payload Length | 16 | The length of everything below this header.| N/A |
 | H | 1 | Is there a header below this one? | N/A |
 | A | 1 | Is alias routing enabled? | N/A |
-| Hop Limit | 8 | The number of times this packet can be forwarded. | N/A |
+| Hop Limit | 9 | The number of times this packet can be forwarded. | N/A |
 | Destination Address | 128 | The destination of the packet (ish). | N/A |
 | Sender Address | 128 | The sender of the packet. Optional with alias header. | N/A |
 
 ### Version
-This field should stay the same across every CP protocol revision/version. Instead of a single bit referring to the version (making only 4 possible), this is interpreted as a number in binary form (16 possible). The version number in the header matches the version of the protocol (0 is 0, 1 is 1, etc...).
+This field should stay the same across every CP protocol revision/version. Instead of a single bit referring to the version (making only 5 possible), this is interpreted as a number in binary form (16 possible). The version number in the header matches the version of the protocol (0 is 0, 1 is 1, etc...).
 
 ### Traffic Class (T)
 Specifies the quality of service that is desired. Each bit depicts the requested quality of a certain aspect of the network (0 being normal and 1 being high).
@@ -261,7 +250,7 @@ As mentioned, bit 0 must be 0. This serves as a very basic (and most likely usel
 The length of all the data contained underneath the CP header. Includes the complimentary headers.
 
 ### More Headers (H)
-See the "More Headers (H)" segment above the "Base Header Format" section.
+More headers is a one bit field denoted by the letter H. 0 means there are no more complimentary headers, and 1 means the opposite.
 
 ### Alias Routing Enabled (A)
 Is this bit is set to 1, the sender field is treated as the alias header.
@@ -281,7 +270,7 @@ The following is a simple diagram showing the makeup of the alias header. Unlike
  0                   1                   2                   3
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-| Type Identifier |           Checksum            |H| Alias Pos |
+|                      See HHS                      | Alias Pos |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |                                                               |
 +                                                               +
@@ -291,22 +280,20 @@ The following is a simple diagram showing the makeup of the alias header. Unlike
 +                                                               +
 |                                                               |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-+                                                               +
-|                     Verification Token                        |
-+                                                               +
+|                                                               |
++                     Verification Token                        +
 |                                                               |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ~~~
 
+| Field | Bits | Description | RFC |
+| :---- | :--: | :---------: | --: |
+| Alias Pos | 6 | The position of the alias. | N/A |
+| Alias Address | 128 | CP address of the alias. | N/A |
+| Verification Token | 64 | A verification token. | N/A |
 
-### Type Identifier
-See directly below the header specification segment. This header uses a header type identifier that is equal to the number 1 (00000001). See "Header Type Detection".
-
-### Checksum
-See directly below the type identifier segment.
-
-### More Headers (H)
-See the "More Headers (H)" segment above the "Base Header Format" section.
+### See HHS
+See RFC 9.
 
 ### Alias Position (Alias Pos)
 The position of the alias. Below is a table explaining the meaning of each bit.
@@ -332,27 +319,23 @@ The following is a simple diagram showing the makeup of the fragment header.
 
 ~~~
  0                   1                   2                   3
- 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-| Type Identifier |           Checksum            |H|F|Padding|
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|         Fragment Offset         |     Stream (srm) Token    |
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-| Srm Token |         Reserved (may be excluded)              |
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      See HHS                      |  Padding  |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|         Fragment Offset       |       Stream (srm) Token       ->
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+  Srm Token |           Reserved (may be excluded)              |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 ~~~
 
-### Type Identifier
-See directly below the header specification segment. This header uses a header type identifier that is equal to the number 2 (00000010). See "Header Type Detection".
+| Field | Bits | Description | RFC |
+| :---- | :--: | :---------: | --: |
+| Fragment Offset | 16 | Offset data from original fragment. | N/A |
+| Stream Token | 22 | Identifies the fragment stream. | N/A |
 
-### Checksum
-See directly below the type identifier segment.
-
-### Final (F)
-Set to 0 if there is more fragments to come, and vice versa, with 1 being set to denote that this is the last fragment.
-
-### More Headers (H)
-See the "More Headers (H)" segment above the "Base Header Format" section.
+### See HHS
+See RFC 9.
 
 ### Fragment Offset
 The offset, in 8-bit octet units, of the data following this header, relative to the start of the fragmentable part of the original header. Because they are measured in 8-octet units, every bit is equal to 8-octet units (1 \* 8 \* 8 = 64). Each fragmentable part of a packet must be a multiple of 64 bits. This means that the maximum size of all the fragment data (once they have been defragmented) is 70464 bits (16 bit max = 65535 -> 65535 \* 8 \* 8 = 4194240). This may seem like a very large maximum stream size, but we might as well put that extra space to good use.
@@ -375,9 +358,11 @@ A token that must be unique from any other stream token used recently.
 "Recently" means within the maximum likely lifetime of a packet including transit time from source to destination and time spent awaiting reassembly with other fragments of the same packet. However, it is not required that a source node know the maximum packet lifetime.  Rather, it is assumed that the requirement can be met by maintaining the Identification value as a simple, 32-bit, "wrap-around" counter, incremented each time a packet must be fragmented.  It is an implementation choice whether to maintain a single counter for the node or multiple counters, e.g., one for each of the node's possible source addresses, or one for each active (source address, destination address)combination.
 
 # References
-[Internet RFC 791](https://datatracker.ietf.org/doc/html/rfc791)
+1. Internet RFC 791
 
-[Internet RFC 2460](https://datatracker.ietf.org/doc/html/rfc2460)
+2. Internet RFC 2460
+
+3. Catnet RFC 9
 
 ##### **Some text was copied verbatim!**
 The only text that was copied were explanations of common networking terms and practices.
