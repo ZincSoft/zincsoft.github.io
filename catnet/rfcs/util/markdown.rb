@@ -1,6 +1,12 @@
 require 'kramdown'
 require 'ruby-progressbar'
 
+def smart_case(field)
+  field.to_s.split(' ').map { |word|
+    /[A-Z][A-Z]+/.match(word) ? word : word.downcase
+  }.join(' ')
+end
+
 def supply
   puts 'Please supply a subcommand.'
 end
@@ -55,8 +61,10 @@ def get_new_index
     current = current.gsub('<!-- TITLE -->', file.split('-').drop(2)
       .join(" ")
       .gsub('.html', '')
-      .gsub(/\w+/) { |word| word.capitalize }
-      .gsub('Rfc', 'RFC'))
+      
+    #.gsub(/\w+/) { |word| /[A-Z][A-Z]+/.match(word) ? word : word.capitalize }
+    # .gsub(/\w+/) { |word| word.capitalize }
+
 
     current = current.gsub('<!-- RFC -->', file.split('-')[1])
 
