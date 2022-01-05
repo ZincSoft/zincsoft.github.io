@@ -60,11 +60,7 @@ def get_new_index
 
     current = current.gsub('<!-- TITLE -->', file.split('-').drop(2)
       .join(" ")
-      .gsub('.html', '')
-      
-    #.gsub(/\w+/) { |word| /[A-Z][A-Z]+/.match(word) ? word : word.capitalize }
-    # .gsub(/\w+/) { |word| word.capitalize }
-
+      .gsub('.html', ''))
 
     current = current.gsub('<!-- RFC -->', file.split('-')[1])
 
