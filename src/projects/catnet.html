@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lighting Web3 on fire. Zinc is helping to build a better internet, away from the blockchain.">
+    <!-- Make this more restrictive. -->
+    <meta name="robots" content="follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/output.css" rel="stylesheet">
+    <title>Zinc - Fixing Web3. It's better.</title>
+</head>
+<body class="bg-persimmon">
+    <section id="projects" class="h-screen w-full py-16 bg-persimmon">
+        <div>
+            <div class="pt-8 text-center">
+                <h3 class="font-sub-mono text-lg">Some of the below are used only in CPv2, not CPv1.</h3>
+                <h2 class="font-display font-bold md:text-8xl lg:text-9xl">Catnet;</h2>
+                <h2 class="font-display font-bold text-4xl md:text-6xl">Technical Explanation &</h2>
+                <h2 class="font-display font-bold text-4xl md:text-6xl"><a href="/projects/catnet/rfc/"><u>Specification/RFCs</u></a></h2>
+            </div>
+
+            <div class="px-16 pt-16">
+                <h3 class="font-sub-mono text-lg">figure 01</h3>
+                <h2 class="font-display font-bold text-4xl md:text-6xl">Comparisons with TOR;</h2>
+                <h3 class="font-display text-3xl md:text-5xl pt-2">and other overlay networks.</h3>
+                <p class="pt-8 text-xl lg:text-justify tracking-wide">
+                Catnet is similar to TOR in that it is a way to route around censorship and access
+                blocked content. However, Catnet is much more efficient and can handle much larger
+                loads than TOR. It is also designed to be more scalable, allowing it to handle more
+                users and traffic. Both Catnet and TOR place a strong emphasis on anonymity and
+                security. Catnet is designed to be more efficient than traditional networks. However,
+                TOR is (at least partially) centralized in that it uses a Directory Authority, which
+                can be corrupted, taken over by the government, etc... By contrast, Catnet uses a DHT
+                to distribute information and eliminate the need for a central authority This makes
+                it more scalable and allows it to handle more users and traffic. Catnet is also
+                designed to be more secure than traditional networks, using mandatory cryptography
+                to protect information.
+                </p>
+            </div>
+
+            <div class="px-16 pt-8">
+                <h3 class="font-sub-mono text-lg">figure 02</h3>
+                <h2 class="font-display font-bold text-4xl md:text-6xl">Comparisons with most of Web3;</h2>
+                <h3 class="font-display text-3xl md:text-5xl pt-2">and why it's better.</h3>
+                <p class="pt-8 text-xl lg:text-justify tracking-wide">
+                Catnet is fundamentally different from almost every Web3 system. It swaps out one of
+                the very basic pillars of its operation, the blockchain, with an on-demand informational
+                processing system. Unlike the fundamental immutability of the blockchain, the state on
+                the network can be mutated and wiped as needed. This makes it possible to create truly
+                dynamic systems that can communicate with each other and change their behaviour as needed
+                (this can include software updates, or even kill themselves). This degree of flexibility
+                is unavailable in any other system. Catnet does not implement any De-Fi protocols into
+                it's core, because of our pledge to simplicity and focus. If anything, any De-Fi system
+                would take place on the application layer (OSI). Catnet is not a blockchain, so it cannot
+                be used to create tokens or cryptocurrencies. However, it can still be used to create a
+                token or cryptocurrency system on the application layer. Catnet is a proposed replacement
+                for the network layer and above in a Web3 system. It is designed to be more efficient and
+                scalable than traditional networks. Unlike preexisting Web3 systems and network overlays
+                (TOR), Catnet replaces the IP protocol itself, leading to more opportunities for anonymity
+                (see Alias Routing).
+                </p>
+            </div>
+
+            <div class="px-16 pt-8">
+                <h3 class="font-sub-mono text-lg">figure 03</h3>
+                <h2 class="font-display font-bold text-4xl md:text-6xl">Netwide data synchronization;</h2>
+                <h3 class="font-display text-3xl md:text-5xl pt-2">and how to make it efficient.</h3>
+                <p class="pt-8 text-xl lg:text-justify tracking-wide">
+                The syncing of information is critical to some Catnet protocols. In order to facilitate a
+                single interface to control the synchronization of data that are compatible with protocols
+                across all (applicable) OSI levels. The synchronization header uses the Header Hierarchy
+                System, to provide the flexibility required to contain many different data formats, without
+                having to reimplement the protocols or at least a subset of them. As synchronization occurs,
+                it spreads throughout the network (looking at DHTs), killed with a TTL value. After traversal,
+                the message is propagated back to the origin, and participants in the process may choose to
+                ignore or accept this information to build their own cache (if reasonable). This way, less
+                synchronization is needed, as it becomes more and more likely that a synchronization request
+                isn't required.
+                </p>
+            </div>
+
+            <div class="px-16 pt-8">
+                <h3 class="font-sub-mono text-lg">figure 04</h3>
+                <h2 class="font-display font-bold text-4xl md:text-6xl">Header Hierarchy System;</h2>
+                <h3 class="font-display text-3xl md:text-5xl pt-2">and how it helps DRY.</h3>
+                <p class="pt-8 text-xl lg:text-justify tracking-wide">
+                Deviating from the internet protocols, the Catnet protocols try to reduce the number of
+                protocols instead of following the DRY principle more closely. Take UDP and TCP as an 
+                example. They both have duplicated fields and can share code, not to mention perform the
+                same basic task. The Header Hierarchy System (HHS) specifies complimentary headers and how
+                they are integrated. This system is designed to make it possible to have a single header
+                that can encapsulate different payloads, as well as multiplex different protocols over a
+                single connection. This system also allows for the easy addition of new protocols, without
+                the need to update the entire system. This helps to reduce code repetition, creating a more
+                maintainable code base, along with simplifying the protocols underlying Catnet.
+                </p>
+            </div>
+
+            <div class="px-16 pt-8">
+                <h3 class="font-sub-mono text-lg">figure 05</h3>
+                <h2 class="font-display font-bold text-4xl md:text-6xl">Distributed Hash Tables</h2>
+                <h3 class="font-display text-3xl md:text-5xl pt-2">and how they work in Catnet.</h3>
+                <p class="pt-8 text-xl lg:text-justify tracking-wide">
+                DHTs are a key part of Catnet and are used to distribute information across the network.
+                In a DHT, each node is responsible for a portion of the overall data. This data is distributed
+                across the network and can be accessed by any node. A DHT is a sort of cache; it's populated
+                on the fly and information is offloaded when not needed. When a node wants to access data,
+                it queries its own DHT instance for the relevant nodes. If no relevant nodes are found the
+                nature of this system allows for the traversal of other nodes, querying their DHT instances until
+                all the information is found. The DHTs contain metadata that allows for tracking other nodes that may
+                have the information. One of the key benefits of a DHT is that it allows for the efficient distribution
+                of information. This distribution is done on the fly, meaning that information is only distributed when
+                it is needed. This helps to reduce the load on the network and allows for more efficient use of
+                resources. Additionally, because DHTs are just caches that would have to be tracked locally by malware,
+                any "successful" attack, would only map the network, which can be done completely legally.
+                </p>
+            </div>
+
+            <div class="px-16 pt-8">
+                <h3 class="font-sub-mono text-lg">figure 06</h3>
+                <h2 class="font-display font-bold text-4xl md:text-6xl">Alias Routing</h2>
+                <h3 class="font-display text-3xl md:text-5xl pt-2">and how controlled spoofing can be used for good.</h3>
+                <p class="pt-8 text-xl lg:text-justify tracking-wide">
+                Alias routing is basically a smarter version of onion routing (vast simplification). It leverages the
+                power of the CP protocol to do a controlled spoof. The CP only allows for this kind of spoofing (and not)
+                just in the protocol, but it also makes it impossible. Alias routing works by establishing one middleman.
+                Only one is used when trasmitting and receiving information. Let's say Sam wants to visit
+                <a href="https://sally.com">Sally.com</a>, without making themselves known. First, Sam contacts Sally.com
+                directly. Instead of passing an CP to send the message back to the origin, Sam sends the CP of the middleman,
+                also called an alias. Sam also sends an alias token. Sally.com sends their request to the alias, along with
+                the alias token. Before all this happened, Sam made a deal with the alias, and registeres an alias token with
+                a specific CP. Whenever the alias receives a message from Sally.com's CP and the alias token matches up, it
+                forwards it to the origin. The alias cannot see the message because of the existing TLS connection. Plus, the
+                alias is switched up every once in a while so that the encryption cannot be broken in time. To show Sally.com
+                that Sam is Sam after switching up the alias, a session token is checked. After a TLS connection has been established,
+                Sam and Sally.com can communicate through the alias.
+            </p>
+            </div>
+
+            <div class="px-16 py-8">
+                <h3 class="font-sub-mono text-lg">figure 07</h3>
+                <h2 class="font-display font-bold text-4xl md:text-6xl">Protocols</h2>
+                <h3 class="font-display text-3xl md:text-5xl pt-2">and how they are standarized.</h3>
+                <p class="pt-8 text-xl lg:text-justify tracking-wide">
+                Protocols are standardized through RFCs (Request For Comments). Once finalized, they go into effect when the next
+                version of the CP protocol suite is published (every major version). <b>They are much more in-depth than these
+                paragraphs</b>, so read them if you wish to gain a deeper understanding.
+                </p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

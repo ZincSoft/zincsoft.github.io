@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lighting Web3 on fire. Zinc is helping to build a better internet, away from the blockchain.">
+    <!-- Make this more restrictive. -->
+    <meta name="robots" content="follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/output.css" rel="stylesheet">
+    <title>Zinc - Fixing Web3. It's better.</title>
+</head>
+<body>
+    <section id="projects" class="h-screen w-full px-16 py-16">
+        <div>
+            <div class="pt-8 text-center">
+                <h3 class="font-sub-mono text-lg"><i>Look ma, a different color!</i></h3>
+                <h2 class="font-display font-bold md:text-8xl lg:text-9xl">Catnet;</h2>
+                <h2 class="font-display font-bold text-4xl md:text-6xl">Request for comments (RFCs).</h2>
+            </div>
+
+            <p class="pt-8 text-xl lg:text-justify tracking-wide">
+            Just like the internet/web that we have now, Catnet standardizes protocols and interfaces
+            via request for comments. They are for the purpose of standardization, and to get feedback
+            from the community before they are integrates. Others can also submit their own RFCs for
+            comment. The ones marked as non-finalized are open to comment.
+            </p>
+
+            <div>
+                <div class="bg-white w-full">
+                    <!-- INDEX -->
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+

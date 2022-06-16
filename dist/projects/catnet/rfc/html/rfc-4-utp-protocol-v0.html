@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lighting Web3 on fire. Zinc is helping to build a better internet, away from the blockchain.">
+    <!-- Make this more restrictive. -->
+    <meta name="robots" content="follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/output.css" rel="stylesheet">
+    <title>Zinc - Fixing Web3. It's better.</title>
+</head>
+<body>
+    <section id="projects" class="h-screen w-full py-16">
+        <div>
+            <div class="pt-8 text-center">
+                <h3 class="font-sub-mono text-lg">Finalized.</h3>
+                <h2 class="font-display font-bold md:text-8xl lg:text-9xl">UTP Version 0 (UTPv0)</h2>
+                <h2 class="font-display font-bold text-4xl md:text-6xl"><a href="/projects/catnet/rfc/"><u>Go back?</u></a></h2>
+            </div>
+
+            <div class="px-16 pt-16">
+                <!-- <h3 class="font-sub-mono text-lg">figure 01</h3>
+                <h2 class="font-display font-bold text-4xl md:text-6xl">Comparisons with TOR;</h2>
+                <h3 class="font-display text-3xl md:text-5xl pt-2">and other overlay networks.</h3>
+                <p class="pt-8 text-xl lg:text-justify tracking-wide">
+                Catnet is similar to TOR in that it is a way to route around censorship and access
+                blocked content. However, Catnet is much more efficient and can handle much larger
+                loads than TOR. It is also designed to be more scalable, allowing it to handle more
+                users and traffic. Both Catnet and TOR place a strong emphasis on anonymity and
+                security. Catnet is designed to be more efficient than traditional networks. However,
+                TOR is (at least partially) centralized in that it uses a Directory Authority, which
+                can be corrupted, taken over by the government, etc... By contrast, Catnet uses a DHT
+                to distribute information and eliminate the need for a central authority This makes
+                it more scalable and allows it to handle more users and traffic. Catnet is also
+                designed to be more secure than traditional networks, using mandatory cryptography
+                to protect information.
+                </p> -->
+
+                <p class="text-xl lg:text-justify tracking-wide">UTP Version 0 (UTPv0)</p>
+
+<h1 class="pt-8 font-display font-bold text-4xl md:text-6xl" id="introduction">Introduction</h1>
+<p class="text-xl lg:text-justify tracking-wide">The Uncontrolled user-datagram Transmission Protocol (UTP) is defined to transport datagrams over a network. The underlying protocol is assumed to be the CP protocol (residing on layer 3).</p>
+
+<p class="text-xl lg:text-justify tracking-wide">UTP is a protocol that resides on the transport layer. As such, it is used to send datagrams from program to program. The protocol provides no protection or security besides the mandatory checksum (discussed in the specification). If an application needs ordered and reliable data, use another protocol such as the Advanced Transmission Protocol (ATP).</p>
+
+<p class="text-xl lg:text-justify tracking-wide">In reality, UTP is an unreliable datagram transmission mechanism but lays the foundation for other transport protocols. UTP is a protocol that deals with ports, and that is it. It can be used for data transmission, or another protocol can take advantage of the base functionality that it already provides.</p>
+
+<h2 class="pt-8 font-display font-bold text-3xl md:text-5xl" id="motivation">Motivation</h2>
+<p class="text-xl lg:text-justify tracking-wide">A protocol that is capable of transmitting sizeable data over CP.</p>
+
+<h2 class="pt-8 font-display font-bold text-3xl md:text-5xl" id="scope">Scope</h2>
+<p class="text-xl lg:text-justify tracking-wide">This protocol sits directly on top of CP. Below its own header either resides the header of another application/transport layer protocol or a datagram itself.</p>
+
+<h2 class="pt-8 font-display font-bold text-3xl md:text-5xl" id="interface">Interface</h2>
+<p class="text-xl lg:text-justify tracking-wide">UTP is the only transport protocol (capable of supporting an application protocol) that sits directly on top of CP. Every other transport protocol (capable of supporting an application protocol) relies on UTP.</p>
+
+<h1 class="pt-8 font-display font-bold text-4xl md:text-6xl" id="specification">Specification</h1>
+
+<h2 class="pt-8 font-display font-bold text-3xl md:text-5xl" id="base-header-format">Base Header Format</h2>
+<p class="text-xl lg:text-justify tracking-wide">The following is a simple diagram showing the makeup of the UTP protocol.</p>
+
+<pre class="py-8 text-xl lg:text-justify tracking-wide"><code> 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      See HHS                      |  Padding  |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|          Source Port          |       Destination Port        |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|           Datagram Length             |        Reserved       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</code></pre>
+
+<table class="text-center border-2 border-black text-xl text-left text-gray-500">
+  <thead class="border-2 border-black text-xl text-gray-700 uppercase">
+    <tr>
+      <th style="text-align: left">Field</th>
+      <th style="text-align: center">Bits</th>
+      <th style="text-align: center">Description</th>
+      <th style="text-align: right">RFC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="border-2 border-black text-xl text-gray-700 p-4" style="text-align: left">Source Port</td>
+      <td class="border-2 border-black text-xl text-gray-700 p-4" style="text-align: center">16</td>
+      <td class="border-2 border-black text-xl text-gray-700 p-4" style="text-align: center">The originating port, except for in alias routing.</td>
+      <td class="border-2 border-black text-xl text-gray-700 p-4" style="text-align: right">N/A</td>
+    </tr>
+    <tr>
+      <td class="border-2 border-black text-xl text-gray-700 p-4" style="text-align: left">Destination Port</td>
+      <td class="border-2 border-black text-xl text-gray-700 p-4" style="text-align: center">16</td>
+      <td class="border-2 border-black text-xl text-gray-700 p-4" style="text-align: center">The destination port.</td>
+      <td class="border-2 border-black text-xl text-gray-700 p-4" style="text-align: right">N/A</td>
+    </tr>
+    <tr>
+      <td class="border-2 border-black text-xl text-gray-700 p-4" style="text-align: left">Datagram Length</td>
+      <td class="border-2 border-black text-xl text-gray-700 p-4" style="text-align: center">20</td>
+      <td class="border-2 border-black text-xl text-gray-700 p-4" style="text-align: center">The length of the datagram.</td>
+      <td class="border-2 border-black text-xl text-gray-700 p-4" style="text-align: right">N/A</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="pt-8 font-display font-bold text-2xl md:text-4xl" id="see-hhs">See HHS</h3>
+<p class="text-xl lg:text-justify tracking-wide">See RFC 9.</p>
+
+<h3 class="pt-8 font-display font-bold text-2xl md:text-4xl" id="source-port">Source Port</h3>
+<p class="text-xl lg:text-justify tracking-wide">The port that this packet was sent from.</p>
+
+<p class="text-xl lg:text-justify tracking-wide">If this packet was sent encapsulated in a CP packet with alias routing enabled, this source port should be set to the port that the alias is listing to.</p>
+
+<h3 class="pt-8 font-display font-bold text-2xl md:text-4xl" id="destination-port">Destination Port</h3>
+<p class="text-xl lg:text-justify tracking-wide">The port that this packet should be sent to once it reaches its target destination.</p>
+
+<h3 class="pt-8 font-display font-bold text-2xl md:text-4xl" id="datagram-length">Datagram Length</h3>
+<p class="text-xl lg:text-justify tracking-wide">The length of everything else, including the complimentary headers.</p>
+
+<h2 class="pt-8 font-display font-bold text-3xl md:text-5xl" id="extensibility">Extensibility</h2>
+<p class="text-xl lg:text-justify tracking-wide">As mentioned earlier/above, UTP is the only transport protocol (capable of supporting an application protocol) that sits directly on CP. This would be a problem since UTP provides no data reliability if it was not for the intended extensibility of UTP. Remember that UTP follows the header hierarchy system (HHS, 9).</p>
+
+<p class="text-xl lg:text-justify tracking-wide">Each UTP complimentary header is defined in its own RFC. Below is a list.</p>
+
+<table class="text-center border-2 border-black text-xl text-left text-gray-500">
+  <thead class="border-2 border-black text-xl text-gray-700 uppercase">
+    <tr>
+      <th style="text-align: left">Name</th>
+      <th style="text-align: right">RFC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="border-2 border-black text-xl text-gray-700 p-4" style="text-align: left">ATP</td>
+      <td class="border-2 border-black text-xl text-gray-700 p-4" style="text-align: right">5</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 class="pt-8 font-display font-bold text-4xl md:text-6xl" id="reference">Reference</h1>
+
+<ol class="text-xl lg:text-justify tracking-wide">
+  <li>Catnet RFC 5</li>
+  <li>Catnet RFC 9</li>
+  <li>Catnet RFC 1</li>
+  <li>Internet RFC 768</li>
+</ol>
+
+<h1 class="pt-8 font-display font-bold text-4xl md:text-6xl" id="authors">Authors</h1>
+<p class="text-xl lg:text-justify tracking-wide">Milo Banks</p>
+
+            </div>
+        </div>
+    </div>
+</div>

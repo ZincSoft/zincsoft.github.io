@@ -1,4 +1,6 @@
-all: assets/style.css
+all:
+	npx tailwindcss build -c tailwind.config.js -i ./src/input.css -o ./dist/output.css
+	npx dessi --source=./src --target=./dist
 
-assets/style.css: assets/_index.scss assets/_base.scss assets/_utilities.scss assets/_variables.scss assets/_components.scss
-	sass assets/_index.scss assets/style.css
+serve:
+	python3 -m http.server --dir ./dist
