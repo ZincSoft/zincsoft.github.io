@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lighting Web3 on fire. Zinc is helping to build a better internet, away from the blockchain.">
+    <!-- Make this more restrictive. -->
+    <meta name="robots" content="follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/output.css" rel="stylesheet">
+    <title>Zinc - Fixing Web3. It's better.</title>
+</head>
+<body>
+    <section id="projects" class="h-screen w-full py-16">
+        <div>
+            <div class="pt-8 text-center">
+                <h3 class="font-sub-mono text-lg">Finalized.</h3>
+                <h2 class="font-display font-bold md:text-8xl lg:text-9xl"><!-- TITLE --></h2>
+                <h2 class="font-display font-bold text-4xl md:text-6xl"><a href="/projects/catnet/rfc/"><u>Go back?</u></a></h2>
+            </div>
+
+            <div class="px-16 pt-16">
+                <!-- <h3 class="font-sub-mono text-lg">figure 01</h3>
+                <h2 class="font-display font-bold text-4xl md:text-6xl">Comparisons with TOR;</h2>
+                <h3 class="font-display text-3xl md:text-5xl pt-2">and other overlay networks.</h3>
+                <p class="pt-8 text-xl lg:text-justify tracking-wide">
+                Catnet is similar to TOR in that it is a way to route around censorship and access
+                blocked content. However, Catnet is much more efficient and can handle much larger
+                loads than TOR. It is also designed to be more scalable, allowing it to handle more
+                users and traffic. Both Catnet and TOR place a strong emphasis on anonymity and
+                security. Catnet is designed to be more efficient than traditional networks. However,
+                TOR is (at least partially) centralized in that it uses a Directory Authority, which
+                can be corrupted, taken over by the government, etc... By contrast, Catnet uses a DHT
+                to distribute information and eliminate the need for a central authority This makes
+                it more scalable and allows it to handle more users and traffic. Catnet is also
+                designed to be more secure than traditional networks, using mandatory cryptography
+                to protect information.
+                </p> -->
+
+                <!-- HTML -->
+            </div>
+        </div>
+    </div>
+</div>
