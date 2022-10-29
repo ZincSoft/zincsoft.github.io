@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lighting Web3 on fire. Zinc is helping to build a better internet, away from the blockchain.">
+    <!-- Make this more restrictive. -->
+    <meta name="robots" content="follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/output.css" rel="stylesheet">
+    <title>Zinc - Fixing Web3. It's better.</title>
+</head>
+<body>
+    <section id="projects" class="h-screen w-full py-16">
+        <div>
+            <div class="pt-8 text-center">
+                <h3 class="font-sub-mono text-lg">Finalized.</h3>
+                <h2 class="font-display font-bold md:text-8xl lg:text-9xl">Header Hierarchy System (HHS)</h2>
+                <h2 class="font-display font-bold text-4xl md:text-6xl"><a href="/projects/catnet/rfc/"><u>Go back?</u></a></h2>
+            </div>
+
+            <div class="px-16 pt-16">
+                <!-- <h3 class="font-sub-mono text-lg">figure 01</h3>
+                <h2 class="font-display font-bold text-4xl md:text-6xl">Comparisons with TOR;</h2>
+                <h3 class="font-display text-3xl md:text-5xl pt-2">and other overlay networks.</h3>
+                <p class="pt-8 text-xl lg:text-justify tracking-wide">
+                Catnet is similar to TOR in that it is a way to route around censorship and access
+                blocked content. However, Catnet is much more efficient and can handle much larger
+                loads than TOR. It is also designed to be more scalable, allowing it to handle more
+                users and traffic. Both Catnet and TOR place a strong emphasis on anonymity and
+                security. Catnet is designed to be more efficient than traditional networks. However,
+                TOR is (at least partially) centralized in that it uses a Directory Authority, which
+                can be corrupted, taken over by the government, etc... By contrast, Catnet uses a DHT
+                to distribute information and eliminate the need for a central authority This makes
+                it more scalable and allows it to handle more users and traffic. Catnet is also
+                designed to be more secure than traditional networks, using mandatory cryptography
+                to protect information.
+                </p> -->
+
+                <p class="text-xl lg:text-justify tracking-wide">Header Hierarchy System (HHS)</p>
+
+<h1 class="pt-8 font-display font-bold text-4xl md:text-6xl" id="introduction">Introduction</h1>
+<p class="text-xl lg:text-justify tracking-wide">Deviating from the internet protocols, the Catnet protocols try to reduce the number of protocols instead of following the DRY principle more closely. Take UDP and TCP as an example. They both have duplicated fields and can share code, not to mention performing the same task. Why have two protocols when one will suffice?</p>
+
+<p class="text-xl lg:text-justify tracking-wide">The Header Hierarchy System (HHS) specifies complimentary headers and how they are integrated.</p>
+
+<h2 class="pt-8 font-display font-bold text-3xl md:text-5xl" id="vocabulary">Vocabulary</h2>
+
+<h3 class="pt-8 font-display font-bold text-2xl md:text-4xl" id="header">Header</h3>
+<p class="text-xl lg:text-justify tracking-wide">“Metadata” that goes at the beginning of a protocol.</p>
+
+<h3 class="pt-8 font-display font-bold text-2xl md:text-4xl" id="complimentary-header">Complimentary Header</h3>
+<p class="text-xl lg:text-justify tracking-wide">A header that compliments a base one and provides optional information. For example, ATP is a complimentary header to UTP because ATP specifies optional more information.</p>
+
+<h3 class="pt-8 font-display font-bold text-2xl md:text-4xl" id="dry">DRY</h3>
+<p class="text-xl lg:text-justify tracking-wide">“Don’t repeat yourself.”</p>
+
+<blockquote>
+  <p class="text-xl lg:text-justify tracking-wide">The DRY principle [states], “Every piece of knowledge must have a single, unambiguous, authoritative representation within a system.” The principle has been formulated by Andy Hunt and Dave Thomas in their book The Pragmatic Programmer. They [broadly apply it] to include “database schemas, test plans, the build system, even documentation.” When the DRY principle is applied successfully, a modification of any single element of a system does not require a change in other logically unrelated elements. Additionally, [logically related elements] all change predictably and uniformly and are thus kept in sync.</p>
+</blockquote>
+
+<p class="text-xl lg:text-justify tracking-wide">– <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">Wikipedia</a></p>
+
+<h2 class="pt-8 font-display font-bold text-3xl md:text-5xl" id="motivation">Motivation</h2>
+<p class="text-xl lg:text-justify tracking-wide">Instead of specifying these same rules inside each RFC that takes advantage of this functionality, a new RFC was created not to repeat ourselves. Fitting, isn’t it?</p>
+
+<h2 class="pt-8 font-display font-bold text-3xl md:text-5xl" id="scope">Scope</h2>
+<p class="text-xl lg:text-justify tracking-wide">The HHS system applies to every RFC that seeks to take advantage of it, so long as it is a protocol and is capable of doing so.</p>
+
+<h1 class="pt-8 font-display font-bold text-4xl md:text-6xl" id="specification">Specification</h1>
+
+<h3 class="pt-8 font-display font-bold text-2xl md:text-4xl" id="base-header-fragment-format">Base Header Fragment Format</h3>
+<p class="text-xl lg:text-justify tracking-wide">The following is a simple diagram showing the fragment that every HHS compatible header needs to follow.</p>
+
+<pre class="py-8 text-xl lg:text-justify tracking-wide"><code> 0                   1                   2
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| Type Identifier |           Checksum            |H|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</code></pre>
+
+<h4 class="pt-8 font-display font-bold text-2xl md:text-4xl" id="type-identifier">Type Identifier</h4>
+<p class="text-xl lg:text-justify tracking-wide">This 9-bit number is unique for every HHS compliant protocol.</p>
+
+<h4 class="pt-8 font-display font-bold text-2xl md:text-4xl" id="checksum">Checksum</h4>
+<p class="text-xl lg:text-justify tracking-wide">This checksum is created with this header and all the data below it. In this case, data may refer to another header (complimentary) or just a datagram.</p>
+
+<p class="text-xl lg:text-justify tracking-wide">The checksum is calculated as follows: the checksum field is the 16-bit ones’ complement of the ones’ complement sum of all 16-bit words in the header. For purposes of computing the checksum, the value of the checksum field is zero.</p>
+
+<h4 class="pt-8 font-display font-bold text-2xl md:text-4xl" id="h-next-header">H (Next Header)</h4>
+<p class="text-xl lg:text-justify tracking-wide">A single bit specifying if there is another complimentary header after this one. If not, expect a datagram.</p>
+
+<h1 class="pt-8 font-display font-bold text-4xl md:text-6xl" id="authors">Authors</h1>
+<p class="text-xl lg:text-justify tracking-wide">Milo Banks</p>
+
+            </div>
+        </div>
+    </div>
+</div>
